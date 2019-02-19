@@ -15,20 +15,26 @@ class Orders
     var customerName: String!
     var customerId: String!
     var status: String!
-    var shippingId: String!
+    var shipping_info : ShippingInfo!
+    var order_details : OrderDetails!
     
-    init(orderId: Int, dateCreated: String, dateShipped: String, customerName: String, customerId: String, status: String, shippingId:String)
+    
+    init(orderId: Int, dateCreated: String, dateShipped: String, customerName: String, customerId: String, status: String, si : ShippingInfo, od : OrderDetails)
     {
+        
         self.orderId = orderId
         self.dateCreated = dateCreated
         self.dateShipped = dateShipped
         self.customerName = customerName
         self.customerId = customerId
         self.status = status
-        self.shippingId = shippingId
+        self.shipping_info = si
+        self.order_details = od
     }
     func placeOrder()
     {
         
     }
 }
+
+

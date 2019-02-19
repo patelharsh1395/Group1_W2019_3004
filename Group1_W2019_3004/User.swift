@@ -14,14 +14,21 @@ class User
  
     var userId : String!
     var password : String!
-    var loginStatus : String!
+    var loginStatus : Bool!
     
     
-    init(userId : String, password : String, loginStatus : String)
+    init() {
+        
+    }
+    
+    init?(userId : String, password : String, loginStatus : Bool)
     {
         self.userId = userId
         self.password = password
         self.loginStatus = loginStatus
+        
+        
+        
     }
     
     func verifyLogin() -> Bool
