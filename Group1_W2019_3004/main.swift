@@ -8,5 +8,20 @@
 
 import Foundation
 
-print("Hello, World!")
+//print("Hello, World!")
+//
+//
+//var c = "sushmitha@gmail.com"
+//print(c.isValidEmail())
+
+
+
+
+var ad : [Administrator] = []
+ad.append( Administrator(adminName: "chamdi_boys", email: "sushmitha@gmail.com"))
+
+for i in ad
+{
+    print(i.adminName! , i.email!)
+}
 

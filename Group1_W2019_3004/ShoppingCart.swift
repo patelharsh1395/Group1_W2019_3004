@@ -16,7 +16,10 @@ class ShoppingCart
     var quantity : Int!
     var dateAdded : Int!
     
-    
+    init()
+    {
+        
+    }
     
     init(cartId : Int, productId : Int, quantity : Int , dateAdded : Int ) {
         self.cartId = cartId
