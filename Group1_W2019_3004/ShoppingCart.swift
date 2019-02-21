@@ -102,16 +102,28 @@ class ShoppingCart
     }
      func viewCartDetails()
      {
-        for (i,q) in self.items
+        
+        /* https://stackoverflow.com/questions/36871398/thread-1-exc-bad-instruction-code-exc-1386-invop-subcode-0x0 */
+        if (!self.items.isEmpty)
         {
-            print("  \(i.item_name) ,  \(i.item_price) per Kg , \(q) kg , price: \(i.item_price*q)   ")
+            for (i,q) in self.items
+            {
+                print("  \(i.item_name) ,  \(i.item_price.dollar()) per Kg , \(q) kg , price: \((i.item_price*q).dollar())   ")
+            }
+            return
         }
+        
+        print("it is empty")
         
     }
     func checkOut()
     {
         
     }
+    
+    
+    
+    
 }
 
 
