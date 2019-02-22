@@ -8,87 +8,51 @@
 
 import Foundation
 
-//print("Hello, World!")
-//
-//
-//var c = "sushmitha@gmail.com"
-//print(c.isValidEmail())
+
+var u1 = try  User(password: "1113Hp@12", userId: "patel@gmial.com")
 
 
+//var u2 = try  User(password: "1113Hp@12", userId: "patel@gmial.com")
 
+var a1 = Administrator(adminName: "Harsh" , email: u1.userId , user : u1 )
 
-//var ad : [Administrator] = []
-//ad.append( Administrator(adminName: "chamdi_boys", email: "sushmitha@gmail.com"))
-
-
-var Tomato = Items(item_price: 4.5, item_name: "Tomato")
-var Onion = Items(item_price: 2.4, item_name: "Onion")
-var Orange = Items(item_price:3.5 , item_name: "Orange")
-var Apple = Items(item_price:4.5 , item_name: "Apple")
-var Potato = Items(item_price: 2.1, item_name: "Potato")
-var Banana = Items(item_price: 2.0 , item_name: "Banana")
-
-
-//var  sp = ShoppingCart(cartId: 1 )
-//sp.addCartItem(item: Tomato, quantity: 2.3)
-//sp.addCartItem(item: Apple, quantity: 3)
-//
-//print(sp.viewCartDetails())
-//print("Hello world")
-
-
-
-
-
-
-
-
-//case USERID_PASSWORD_EMPTY(String)
-//case INVALID_FORMAT(String)
-//case ALREADY_EXIST(String)
-
-
+    
 do
 {
-//var user1 = try? User(id: "patelharsh1@gmail.com",  pass: "1114Hp30@"  )
-//var user2 = try? User(id: "patelharsh1@gmail.com",  pass: "1114Hp30@"  )
-
-    _ = try User(password: "1114Hp30@", userId: "patelharsh1@gmail.com")
-    _ = try User(password: "1114Hp30@", userId: "patelharsh1@gmail.com")
-}
-catch CustomError.EMPTY(let par)
-{
-    print(par)
-}
-catch CustomError.INVALID(let par)
-{
-    print(par)
+try a1.add_item(item_name: "Tomato", price: 20)
+try a1.add_item(item_name: "Tomato", price: 21)
+    print(Items.read_items)
 }
 catch CustomError.ALREADY_EXIST(let par)
 {
-    print(par)
+print(par)
 }
 
-//var cust1 = Customer(customerName: Harsh , address: "" , email: "" , creaditCardInfo: 1234_5678_9012_3456 , shippingInfo: , user: user1 )
 
-//var arr = [(Int,String)]()
-//
-//arr.append((1, "Harsh"))
-//arr.append((2, "3"))
-//
-//
-//if (arr[0].0 == 1)
+
+
+
+
+
+//do
 //{
-//    arr[0].1 = "Patel"
+////var user1 = try? User(id: "patelharsh1@gmail.com",  pass: "1114Hp30@"  )
+////var user2 = try? User(id: "patelharsh1@gmail.com",  pass: "1114Hp30@"  )
+//
+//    _ = try User(password: "1114Hp30@", userId: "patelharsh1@gmail.com")
+//    _ = try User(password: "1114Hp30@", userId: "patelharsh1@gmail.com")
 //}
-//
-//
-//for (i,s) in arr
+//catch CustomError.EMPTY(let par)
 //{
-//    print(i,s)
+//    print(par)
 //}
-
-
-
+//catch CustomError.INVALID(let par)
+//{
+//    print(par)
+//}
+//catch CustomError.ALREADY_EXIST(let par)
+//{
+//    print(par)
+//}
 
 
