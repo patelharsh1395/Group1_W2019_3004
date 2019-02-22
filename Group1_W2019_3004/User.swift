@@ -14,90 +14,137 @@ import Foundation
 class User
 {
  
-    var userId : String!
-    var password : String!
-    var loginStatus = LoginStatus.NOTVERIFIED
-    static var users_set = Set<String>()
+   //static var id_pass = [String : String]()
+    
     
     init() {
         
     }
-    init?( password : String,  userId : String) {
+    
+    
+    
+   var userId : String!
+   var password : String!
+   var loginStatus = LoginStatus.NOTVERIFIED
+   static var users_set = Set<String>()
+    
+//    init(id : String , pass : String) throws {
+//        if(!id.isEmpty && !pass.isEmpty )
+//        {
+//            if(!id.isValidEmail())
+//            {
+//                if (!User.id_pass.contains(where: { (i,p) -> Bool in
+//
+//
+//                    return  i == id
+//                }))
+//                {
+//                    if(!pass.isValidPassword())
+//                    {
+//                        User.id_pass.updateValue(pass, forKey: id)
+//                    }
+//                    else
+//                    {
+//                        throw CustomError.INVALID_FORMAT("Password has invalid format")
+//                    }
+//                }
+//                else
+//                {
+//                    throw CustomError.ALREADY_EXIST("\(id) already exist")
+//                }
+//            }
+//            else
+//            {
+//                throw CustomError.INVALID_FORMAT("Userid has invalid format")
+//            }
+//        }
+//        else
+//        {
+//
+//            throw CustomError.USERID_PASSWORD_EMPTY("Userid and Password cannot be empty")
+//
+//        }
+//    }
+//    
+   
+    
+    
+    
+    init( password : String,  userId : String)  throws {
         if (!userId.isEmpty && !password.isEmpty)
         {
                 if(userId.isValidEmail())
                 {
-                    if(password.isValidPassword())
-                    {
-                        if(User.user_exist(st: userId))
+                    if(!User.users_set.contains(userId))
+                    { //  print("inside if contains")
+                        if(password.isValidPassword())
                         {
-                            print("user already exist")
-                            return nil
-                        
+                            self.userId = userId
+                            self.password = password
+                            User.users_set.insert(userId)
+                            //print(User.users_set)
                         }
                         else
                         {
-                            User.user_append(st: userId)
-                            self.userId = userId
-                            self.password = password
+                            throw CustomError.INVALID("Password is in invalid format")
                         }
                     }
                     else
-                    {
-                        print("password : invalid format ")
-                        return nil
+                    {  // print("inside else contains")
+                        throw CustomError.ALREADY_EXIST("\(userId) already exist")
                     }
-                
+
                 }
                 else
                 {
-                        print("userid : invalid email format")
-                        return nil
+                        throw CustomError.INVALID("UserId is in invalid format")
                 }
-            
+
         }
         else
         {
-            print("userid and password  :  can't be empty ")
-            return nil
+            throw CustomError.EMPTY("Field cannot be empty")
         }
-        
+
     }
+   
+    
+    
     init(userId : String, password : String)
     {
         self.userId = userId
         self.password = password
-        
+
     }
-    static func user_exist(st : String) -> Bool
-    {
-        for i in users_set
-        {
-            if(st == i)
-            {
-                return true
-            }
-        }
-        return false
-    }
-    static func user_append(st : String)
-    {
-        users_set.insert(st)
-    }
-    func verifyLogin() -> Bool
-    {
-        if(self.loginStatus == LoginStatus.NOTVERIFIED)
-        {
-            return false
-        }
-        else
-        {
-            return true
-        }
-    }
-    func verify () {
-        loginStatus = LoginStatus.VERIFIED
-    }
-    
+//    static func user_exist(st : String) -> Bool
+//    {
+//        for i in id_pass
+//        {
+//            if(st == i)
+//            {
+//                return true
+//            }
+//        }
+//        return false
+//    }
+//    static func user_append(st : String)
+//    {
+//        users_set.insert(st)
+//    }
+//    func verifyLogin() -> Bool
+//    {
+//        if(self.loginStatus == LoginStatus.NOTVERIFIED)
+//        {
+//            return false
+//        }
+//        else
+//        {
+//            return true
+//        }
+//    }
+//    func verify () {
+//        loginStatus = LoginStatus.VERIFIED
+//    }
+//
     
 }

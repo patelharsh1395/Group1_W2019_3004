@@ -8,22 +8,90 @@
 
 import Foundation
 
-class Administrator
+
+struct Items {
+   
+    
+    fileprivate static  var items = [String:Float]()
+    
+    
+    
+    
+    static var read_items : [String:Float]
+    {
+        get
+        {
+            return Items.items
+        }
+    }
+    
+    fileprivate static func add_item(item_name : String , price : Float ) throws
+    {
+        if (Items.items.isEmpty)
+        {
+            Items.items.updateValue(price, forKey: item_name)
+        }
+        
+        else
+        {
+            for (i,_) in Items.items
+            {
+                if(i.lowercased() != item_name.lowercased())
+                {
+                    //print("inside if for item update ")
+                    Items.items.updateValue(price, forKey: item_name)
+                }
+                else
+                {
+                    throw CustomError.ALREADY_EXIST("\(item_name) already exist")
+                }
+            }
+        }
+    }
+    
+    
+   
+}
+
+
+class Administrator : User
 {
 
 var adminName : String!
 var email : String!
     
-    init(adminName:String,email:String)
+    init(adminName:String,email:String , user : User)
     {
+        super.init(userId: user.userId, password: user.password)
         self.adminName = adminName
         self.email = email
-        
     }
 
-func updateCatalog() -> Bool
+func updateCatalog(item_name : String , price : Float) -> Bool
 {
-    return true
+    if(Items.items.contains(where: { (item,price) -> Bool in
+        return item == item_name
+    }))
+    {
+        Items.items[item_name] = price
+    }
+    return false
 }
 
+func add_item(item_name : String , price : Float) throws
+{
+    if(Items.items.contains(where: { (item,price) -> Bool in
+        return item == item_name
+    }))
+    {
+            updateCatalog(item_name: item_name, price: price)
+    }
+    else
+    {
+   try  Items.add_item(item_name: item_name, price: price)
+    }
+    
+}
+    
+    
 }
