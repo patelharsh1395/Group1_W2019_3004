@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		227105542220681E00DC86A8 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227105532220681E00DC86A8 /* CustomError.swift */; };
 		22897A0F221F0AD600F89D48 /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22897A0E221F0AD600F89D48 /* Items.swift */; };
 		22897A12221F2D4E00F89D48 /* FloatEXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22897A11221F2D4E00F89D48 /* FloatEXT.swift */; };
 		22897A15221F2F0F00F89D48 /* LoginStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22897A14221F2F0F00F89D48 /* LoginStatus.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		227105532220681E00DC86A8 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		22897A0E221F0AD600F89D48 /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
 		22897A11221F2D4E00F89D48 /* FloatEXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatEXT.swift; sourceTree = "<group>"; };
 		22897A14221F2F0F00F89D48 /* LoginStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStatus.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				22897A14221F2F0F00F89D48 /* LoginStatus.swift */,
+				227105532220681E00DC86A8 /* CustomError.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 				3A11572E221C96DB00205B0D /* Customer.swift in Sources */,
 				3A115732221C9C3700205B0D /* StringEXT.swift in Sources */,
 				3A11572D221C96DB00205B0D /* ShoppingCart.swift in Sources */,
+				227105542220681E00DC86A8 /* CustomError.swift in Sources */,
 				3A115715221C8A6F00205B0D /* main.swift in Sources */,
 				22897A17221F3A9600F89D48 /* IntEXT.swift in Sources */,
 				3A115729221C96DB00205B0D /* OrderDetails.swift in Sources */,

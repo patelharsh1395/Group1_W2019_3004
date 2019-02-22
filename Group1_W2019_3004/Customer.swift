@@ -24,7 +24,7 @@ class Customer : User
         super.init()
     }
     
-    init?(customerName : String, address : String, email : String, creaditCardInfo : Int , shippingInfo : String, user : User) {
+    init?(customerName : String, address : String, email : String, creaditCardInfo : Int , shippingInfo : String, user : User  ) {
         
         if(!creaditCardInfo.isValidCard())
         {
@@ -53,9 +53,29 @@ class Customer : User
     {
         orders.append(od)
     }
-    func register()
+    static func register(customerName : String, address : String, email : String, creaditCardInfo : Int , shippingInfo : String, user : User ) throws -> Customer
     {
+        if(!creaditCardInfo.isValidCard())
+        {
+            throw CustomError.INVALID("")
+        }
         
+        if(address == "" || address.isEmpty)
+        {
+            throw CustomError.INVALID("Address cannot be empty")
+        }
+        var cust = Customer()
+        cust.userId = user.userId
+        cust.password = user.password
+        cust.customerName = customerName
+        cust.address = address
+        cust.email = user.userId
+        cust.creaditCardInfo = creaditCardInfo
+        cust.shippingInfo = shippingInfo
+        cust.shopping_cart = []
+        cust.orders = []
+        
+        return cust
     }
     func login()
     {

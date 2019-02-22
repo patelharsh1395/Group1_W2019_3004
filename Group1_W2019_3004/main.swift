@@ -43,10 +43,31 @@ var Banana = Items(item_price: 2.0 , item_name: "Banana")
 
 
 
+//case USERID_PASSWORD_EMPTY(String)
+//case INVALID_FORMAT(String)
+//case ALREADY_EXIST(String)
 
 
-var user1 = User(password: "1114Hp30@",userId: "patelharsh@gmail.com")
-var user2 = User(password: "1114Hp30@", userId: "patelharsh1@gmail.com")
+do
+{
+//var user1 = try? User(id: "patelharsh1@gmail.com",  pass: "1114Hp30@"  )
+//var user2 = try? User(id: "patelharsh1@gmail.com",  pass: "1114Hp30@"  )
+
+    _ = try User(password: "1114Hp30@", userId: "patelharsh1@gmail.com")
+    _ = try User(password: "1114Hp30@", userId: "patelharsh1@gmail.com")
+}
+catch CustomError.EMPTY(let par)
+{
+    print(par)
+}
+catch CustomError.INVALID(let par)
+{
+    print(par)
+}
+catch CustomError.ALREADY_EXIST(let par)
+{
+    print(par)
+}
 
 //var cust1 = Customer(customerName: Harsh , address: "" , email: "" , creaditCardInfo: 1234_5678_9012_3456 , shippingInfo: , user: user1 )
 
