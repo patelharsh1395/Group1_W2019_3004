@@ -9,29 +9,43 @@
 import Foundation
 class Orders
 {
+    private static var count = 1
     var orderId: Int!
     var dateCreated: String!
     var dateShipped: String!
-    var customerName: String!
-    var customerId: String!
-    var status: String!
+    var cust : Customer!
+    var status = OrderStatus.PROCESSING
     var shipping_info : ShippingInfo!
     var order_details : OrderDetails!
+    var shoppingCart : ShoppingCart!
     
-    
-    init(orderId: Int, dateCreated: String, dateShipped: String, customerName: String, customerId: String, status: String, si : ShippingInfo, od : OrderDetails)
+    private init( dateCreated: String ,  si : ShippingInfo, od : OrderDetails , shoppingCart : ShoppingCart , cust : Customer)
     {
-        
-        self.orderId = orderId
+        Orders.count += 1
+        self.orderId = Orders.count
         self.dateCreated = dateCreated
-        self.dateShipped = dateShipped
-        self.customerName = customerName
-        self.customerId = customerId
-        self.status = status
+        self.dateShipped = ""
+        //self.customerName = customerName
+    //    self.customerId = customerId
+    
         self.shipping_info = si
         self.order_details = od
+        self.shoppingCart = shoppingCart
+        self.cust = cust
+    }
+    static func createOrder(customerName: String, customerId: String, status: OrderStatus , si : ShippingInfo, od : OrderDetails , shoppingCart : ShoppingCart , cust : Customer) -> Orders
+    { // reference - https://www.youtube.com/watch?v=ImZWohVhSBY
+        let calendar = Calendar.current
+        let day = calendar.component(.day, from: Date())
+        let month = calendar.component(.month, from: Date())
+        let year = calendar.component(.year, from: Date())
+        return Orders(dateCreated: "\(month)-\(day)-\(year)", si: si, od: od, shoppingCart: shoppingCart, cust: cust)
     }
     func placeOrder()
+    {
+        Administrator.add_order(order: self)
+    }
+    func updateStatus()
     {
         
     }

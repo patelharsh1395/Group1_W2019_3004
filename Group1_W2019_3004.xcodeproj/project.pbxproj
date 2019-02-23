@@ -22,6 +22,7 @@
 		3A11572E221C96DB00205B0D /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A115727221C96DB00205B0D /* Customer.swift */; };
 		3A11572F221C96DB00205B0D /* Administrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A115728221C96DB00205B0D /* Administrator.swift */; };
 		3A115732221C9C3700205B0D /* StringEXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A115731221C9C3700205B0D /* StringEXT.swift */; };
+		9B494B202220D0F000CD04B0 /* OrderStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B494B1F2220D0F000CD04B0 /* OrderStatus.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -53,6 +54,7 @@
 		3A115727221C96DB00205B0D /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		3A115728221C96DB00205B0D /* Administrator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Administrator.swift; sourceTree = "<group>"; };
 		3A115731221C9C3700205B0D /* StringEXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringEXT.swift; sourceTree = "<group>"; };
+		9B494B1F2220D0F000CD04B0 /* OrderStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStatus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			children = (
 				22897A14221F2F0F00F89D48 /* LoginStatus.swift */,
 				227105532220681E00DC86A8 /* CustomError.swift */,
+				9B494B1F2220D0F000CD04B0 /* OrderStatus.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				22897A19221F4B3F00F89D48 /* SetEXT.swift in Sources */,
 				22897A12221F2D4E00F89D48 /* FloatEXT.swift in Sources */,
 				22897A0F221F0AD600F89D48 /* Items.swift in Sources */,
+				9B494B202220D0F000CD04B0 /* OrderStatus.swift in Sources */,
 				3A11572C221C96DB00205B0D /* User.swift in Sources */,
 				3A11572B221C96DB00205B0D /* ShippingInfo.swift in Sources */,
 				3A11572F221C96DB00205B0D /* Administrator.swift in Sources */,

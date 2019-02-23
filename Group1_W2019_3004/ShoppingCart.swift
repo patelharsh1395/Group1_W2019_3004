@@ -11,6 +11,7 @@ import Foundation
 
 class ShoppingCart
 {
+    
     var cartId : Int!
     //var productId : Int!
     var dateAdded = Date()
@@ -18,10 +19,11 @@ class ShoppingCart
     
     init()
     {
-        
+       
     }
     
     init(cartId : Int/*, productId : Int,dateAdded : Int */) {
+        
         self.cartId = cartId
         //self.productId = productId
       //  self.dateAdded = dateAdded

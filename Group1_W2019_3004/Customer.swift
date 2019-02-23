@@ -16,11 +16,12 @@ class Customer : User
     var address : String!
     var email : String!
     var creaditCardInfo : Int!
-    var shippingInfo : String!
+    var current_add_id = 0
+  //  var shippingInfo : String!
     var shopping_cart : [ShoppingCart]!
     var orders : [Orders]!
     static var cust_arr = [Customer]()
-    override init()
+    override private init()
     {
         super.init()
     }
@@ -34,11 +35,11 @@ class Customer : User
     {
         orders.append(od)
     }
-    static func register(customerName : String, address : String, email : String, creaditCardInfo : Int , shippingInfo : String, user : User ) throws -> Bool
+    static func register(customerName : String, address : String, email : String, creaditCardInfo : Int , user : User ) throws -> Bool
     {
         if(!creaditCardInfo.isValidCard())
         {
-            throw CustomError.INVALID("")
+            throw CustomError.INVALID(" Invalid credit card ")
         }
         
         if(address == "" || address.isEmpty)
@@ -52,7 +53,8 @@ class Customer : User
         cust.address = address
         cust.email = user.userId
         cust.creaditCardInfo = creaditCardInfo
-        cust.shippingInfo = shippingInfo
+        //cust.shippingInfo = shippingInfo
+      
         cust.shopping_cart = []
         cust.orders = []
         
@@ -77,9 +79,12 @@ class Customer : User
         }
         
     }
+    
     static func updateProfile(userid : String , pass : String )
     {
         //try var cust =  Customer.login(userid: userid , pass: pass )
         
     }
+    
+    
 }

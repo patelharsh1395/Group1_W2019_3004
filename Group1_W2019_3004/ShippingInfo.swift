@@ -13,9 +13,13 @@ class ShippingInfo
     var shippingType: String!
     var shippingCost: Int!
     var shippingRegionId: Int!
+    var cust : Customer!
+    init() {
+    }
     
-    init(shippingId: Int,shippingType: String,shippingCost: Int,shippingRegionId: Int)
+    init(cust : Customer ,  shippingId: Int,shippingType: String,shippingCost: Int,shippingRegionId: Int)
     {
+       self.cust = cust
        self.shippingId = shippingId
        self.shippingType = shippingType
        self.shippingCost = shippingCost

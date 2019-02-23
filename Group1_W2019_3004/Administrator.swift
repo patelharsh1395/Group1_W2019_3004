@@ -56,9 +56,9 @@ struct Items {
 
 class Administrator : User
 {
-
-var adminName : String!
-var email : String!
+    private static var view_orders = [Orders]()
+    var adminName : String!
+    var email : String!
     
     init(adminName:String,email:String , user : User)
     {
@@ -81,7 +81,7 @@ func updateCatalog(item_name : String , price : Float) -> Bool
 func add_item(item_name : String , price : Float) throws
 {
     if(Items.items.contains(where: { (item,price) -> Bool in
-        return item == item_name
+        return item.lowercased() == item_name.lowercased()
     }))
     {
             updateCatalog(item_name: item_name, price: price)
@@ -92,6 +92,9 @@ func add_item(item_name : String , price : Float) throws
     }
     
 }
+    static  func add_order(order : Orders)    {
+        Administrator.view_orders.append(order)
+    }
     
     
 }
