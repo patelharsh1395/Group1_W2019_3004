@@ -21,22 +21,32 @@ do
 {
 try a1.add_item(item_name: "Tomato", price: 20)
 try a1.add_item(item_name: "Tomato", price: 21)
+try a1.add_item(item_name: "Orange", price: 23.2)
     
-    print(Items.read_items)
-}
-catch CustomError.ALREADY_EXIST(let par)
-{
-print(par)
-}
+    
+ 
+    
+    
 
-
-//case EMPTY(String)
-//case INVALID(String)
-//case ALREADY_EXIST(String)
-
-do{
     let c : Bool = try  Customer.register(customerName: "Harsh", address: "903 rajshree 1", email: u1.userId , creaditCardInfo : 1234567890123456, user: u1)
     print(c)
+   
+    var cust = try  Customer.login(userid: "patel@gmial.com", pass:  "1113Hp@12")
+    
+    
+   try  cust.shopping_cart.addCartItem(item_forCart: "TOMAto", quantity: 5.5)
+    try cust.shopping_cart.addCartItem(item_forCart: "TOMAto", quantity: 5.5)
+    try cust.shopping_cart.addCartItem(item_forCart: "Orange", quantity: 5.5)
+    
+    try  cust.shopping_cart.checkOut()
+    try cust.placeOrder(shippingInfo: ShippingInfo())
+    
+    a1.display()
+    
+    
+    
+   print( cust.shopping_cart.readItemFromCart)
+    
    
 }
 catch CustomError.EMPTY(let par)
@@ -53,25 +63,7 @@ catch CustomError.ALREADY_EXIST(let par)
 }
 
 
-//do
-//{
-////var user1 = try? User(id: "patelharsh1@gmail.com",  pass: "1114Hp30@"  )
-////var user2 = try? User(id: "patelharsh1@gmail.com",  pass: "1114Hp30@"  )
-//
-//    _ = try User(password: "1114Hp30@", userId: "patelharsh1@gmail.com")
-//    _ = try User(password: "1114Hp30@", userId: "patelharsh1@gmail.com")
-//}
-//catch CustomError.EMPTY(let par)
-//{
-//    print(par)
-//}
-//catch CustomError.INVALID(let par)
-//{
-//    print(par)
-//}
-//catch CustomError.ALREADY_EXIST(let par)
-//{
-//    print(par)
-//}
+
+
 
 

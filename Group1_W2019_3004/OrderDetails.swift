@@ -8,28 +8,40 @@
 
 import Foundation
 
-class OrderDetails
+class OrderDetails : Orders
 {
     var orderId : Int!
-    var productId : Int!
-    var productName : String!
-    var quantity : Int!
-    var unitCost : Float!
-    var subTotal : Float!
+  //  let cust : Customer!
     
-    init(orderId:Int,productId:Int,productName:String,quantity:Int,unitCost:Float,subTotal:Float)
+    init(orderId:Int )
     {
         self.orderId = orderId
-        self.productId = productId
-        self.productName = productName
-        self.quantity = quantity
-        self.unitCost = unitCost
-        self.subTotal = subTotal
+        //self.cust = cust
     }
     
     func calcprice()
     {
-        
+        print(" orderId : \(orderId)")
+        print(" shipping info : null ")
+        var total : Float = 0
+        var subTotal : Float = 0
+        var ItemsTemp = Items.read_items
+        var unitPrice : Float = 0
+        for (itemFromCart,quant) in shopping_cart.readItemFromCart
+        {
+            for (item, price) in Items.read_items
+            {
+                if(item.lowercased() == itemFromCart.lowercased())
+                {   unitPrice = price
+                    subTotal = price*quant
+                    total+=subTotal
+                    break
+                }
+            }
+            print(" Product : \(itemFromCart) , quantity : \(quant) , unitCost : \(unitPrice) , subtotal : \(subTotal) , ")
+            
+        }
+        print("total billing amount : \(total) ")
     }
 
 }

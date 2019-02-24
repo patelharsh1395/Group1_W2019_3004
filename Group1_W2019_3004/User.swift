@@ -28,44 +28,7 @@ class User
    var loginStatus = LoginStatus.NOTVERIFIED
    static var users_set = Set<String>()
     
-//    init(id : String , pass : String) throws {
-//        if(!id.isEmpty && !pass.isEmpty )
-//        {
-//            if(!id.isValidEmail())
-//            {
-//                if (!User.id_pass.contains(where: { (i,p) -> Bool in
-//
-//
-//                    return  i == id
-//                }))
-//                {
-//                    if(!pass.isValidPassword())
-//                    {
-//                        User.id_pass.updateValue(pass, forKey: id)
-//                    }
-//                    else
-//                    {
-//                        throw CustomError.INVALID_FORMAT("Password has invalid format")
-//                    }
-//                }
-//                else
-//                {
-//                    throw CustomError.ALREADY_EXIST("\(id) already exist")
-//                }
-//            }
-//            else
-//            {
-//                throw CustomError.INVALID_FORMAT("Userid has invalid format")
-//            }
-//        }
-//        else
-//        {
-//
-//            throw CustomError.USERID_PASSWORD_EMPTY("Userid and Password cannot be empty")
-//
-//        }
-//    }
-//    
+
    
     
     

@@ -25,7 +25,7 @@ struct Items {
         }
     }
     
-    fileprivate static func add_item(item_name : String , price : Float ) throws
+    fileprivate static func add_item(item_name : String , price : Float) throws
     {
         if (Items.items.isEmpty)
         {
@@ -95,6 +95,15 @@ func add_item(item_name : String , price : Float) throws
     static  func add_order(order :  Orders)    {
         Administrator.view_orders.append(order)
     
+    }
+    
+    func display()
+    {
+        print("inside ")
+        for ord in Administrator.view_orders {
+            print("inside for")
+           print( ord.order_details.cust.customerName)
+        }
     }
     
     

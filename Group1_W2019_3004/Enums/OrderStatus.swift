@@ -15,4 +15,5 @@ enum OrderStatus
     case PROCESSING
     case OUTFORSHIPPING
     case DELIVERED
+    case CANCELED
 }

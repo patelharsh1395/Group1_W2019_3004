@@ -86,9 +86,20 @@ class Customer : User
         //try var cust =  Customer.login(userid: userid , pass: pass )
         
     }
-    func placeOrder() ->  {
-            Orders.createOrder(customerName: self.customerName, customerId: self.custid  , si: ShippingInfo, od: <#T##OrderDetails#>, shoppingCart: <#T##ShoppingCart#>, cust: <#T##Customer#>)
+    func placeOrder(shippingInfo : ShippingInfo ) throws
+    {
+        if(self.shopping_cart.readonly_checkout)
+        {
+                let orderTemp =  Orders.createOrder(cust : self , si: shippingInfo )
+                self.shopping_cart.deleteAll()
+                self.orders.append(orderTemp)
+        }
+        else
+        {
+            throw CustomError.INVALID("Need to checkout from shopping cart")
+        }
     }
+
     
     
 }
