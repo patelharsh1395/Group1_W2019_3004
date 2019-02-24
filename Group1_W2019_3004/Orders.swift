@@ -40,21 +40,21 @@ class Orders
         self.shoppingCartDict.updateValue(quantity, forKey: item )
         }
         
-        self.order_details = OrderDetails(orderId: self.orderId, cust : cust)
+        self.order_details = OrderDetails(orderId: self.orderId )
     }
-    static func createOrder(cust : Customer , si : ShippingInfo ) -> Orders
+    static func createOrder(custId : Int, custName : String , si : ShippingInfo ) -> Orders
     {
-        print(cust.customerName)
+       
         // reference - https://www.youtube.com/watch?v=ImZWohVhSBY
         let calendar = Calendar.current
         let day = calendar.component(.day, from: Date())
         let month = calendar.component(.month, from: Date())
         let year = calendar.component(.year, from: Date())
-        return Orders(dateCreated: "\(month)-\(day)-\(year)", cust : cust.customerName  , si: si,  shoppingCart: cust.shopping_cart.readItemFromCart  )
+        return Orders(dateCreated: "\(month)-\(day)-\(year)", custId : custId, custName : custName , si: si,  shoppingCart: cust.shopping_cart.readItemFromCart )
         
     }
     func placeOrder()
-    {   print(self.cust.customerName)
+    {  // print(self.cust.customerName)
         Administrator.add_order(order: self)
     }
     func updateStatus(order : OrderStatus)
