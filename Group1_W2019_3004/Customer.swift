@@ -12,25 +12,26 @@ import Foundation
 
 class Customer : User
 {
+    static var counter = 0
+    var custid : Int!
     var customerName : String!
     var address : String!
     var email : String!
     var creaditCardInfo : Int!
     var current_add_id = 0
   //  var shippingInfo : String!
-    var shopping_cart : [ShoppingCart]!
+    let shopping_cart = ShoppingCart.getShoppingCart()
     var orders : [Orders]!
     static var cust_arr = [Customer]()
     override private init()
     {
+        Customer.counter+=1
+        self.custid = Customer.counter
         super.init()
     }
     
     
-    func addShoppingCart(sc : ShoppingCart)
-    {
-        shopping_cart.append(sc)
-    }
+    
     func addOrders(od : Orders)
     {
         orders.append(od)
@@ -55,8 +56,8 @@ class Customer : User
         cust.creaditCardInfo = creaditCardInfo
         //cust.shippingInfo = shippingInfo
       
-        cust.shopping_cart = []
-        cust.orders = []
+       // cust.shopping_cart =
+       cust.orders = []
         
         Customer.cust_arr.append(cust)
         return true
@@ -84,6 +85,9 @@ class Customer : User
     {
         //try var cust =  Customer.login(userid: userid , pass: pass )
         
+    }
+    func placeOrder() ->  {
+            Orders.createOrder(customerName: self.customerName, customerId: self.custid  , si: ShippingInfo, od: <#T##OrderDetails#>, shoppingCart: <#T##ShoppingCart#>, cust: <#T##Customer#>)
     }
     
     

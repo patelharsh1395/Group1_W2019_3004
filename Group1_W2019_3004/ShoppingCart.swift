@@ -12,22 +12,17 @@ import Foundation
 class ShoppingCart
 {
     
-    var cartId : Int!
+   // var cartId : Int!
     //var productId : Int!
-    var dateAdded = Date()
-    var items = [String : Float]()
     
-    init()
+    private var items = [String : Float]()
+    
+    private init()
     {
        
     }
     
-    init(cartId : Int/*, productId : Int,dateAdded : Int */) {
-        
-        self.cartId = cartId
-        //self.productId = productId
-      //  self.dateAdded = dateAdded
-    }
+    
     
     func addCartItem(item_forCart : String , quantity : Float) throws
     {
@@ -135,7 +130,10 @@ class ShoppingCart
     {
         
     }
-    
+    static func getShoppingCart() -> ShoppingCart
+    {
+        return ShoppingCart()
+    }
     
     
     

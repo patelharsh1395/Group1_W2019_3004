@@ -92,8 +92,9 @@ func add_item(item_name : String , price : Float) throws
     }
     
 }
-    static  func add_order(order : Orders)    {
+    static  func add_order(order :  Orders)    {
         Administrator.view_orders.append(order)
+    
     }
     
     

@@ -35,9 +35,7 @@ print(par)
 //case ALREADY_EXIST(String)
 
 do{
-    
-
-    var c : Bool = try  Customer.register(customerName: "Harsh", address: "903 rajshree 1", email: u1.userId , creaditCardInfo : 1234567890123456, user: u1)
+    let c : Bool = try  Customer.register(customerName: "Harsh", address: "903 rajshree 1", email: u1.userId , creaditCardInfo : 1234567890123456, user: u1)
     print(c)
    
 }
