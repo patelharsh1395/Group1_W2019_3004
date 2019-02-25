@@ -19,7 +19,7 @@ class Customer : User
     var email : String!
     var creaditCardInfo : Int!
     var current_add_id = 0
-    let shopping_cart = ShoppingCart.getShoppingCart()
+   private let shopping_cart = ShoppingCart.getShoppingCart()
    var orders : [Orders]!
     static var cust_arr = [Customer]()
     
@@ -114,7 +114,7 @@ class Customer : User
                // self.shopping_cart.deleteAll()
                 self.orders.append(orderTemp)
                 orderTemp.placeOrder()
-            self.shopping_cart.deleteAll()
+            self.shopping_cart.removeAll()
         }
         else
         {
@@ -139,4 +139,13 @@ class Customer : User
         return str
     }
     
+    
+    func addItemToShoppingCart(item : String , qty : Float ) throws
+    {
+        try self.shopping_cart.addCartItem(item_forCart: item, quantity: qty)
+    }
+    func removeItemFromShoppingCart(item : String)
+    {
+        try self.shopping_cart.removeItem(item: item)
+    }
 }

@@ -15,7 +15,7 @@ class ShoppingCart
    // var cartId : Int!
     //var productId : Int!
     
-    private var items = [String : Float]()
+  private   var items = [String : Float]()
     var readItemFromCart : [String:Float]
     {
         get
@@ -106,7 +106,7 @@ class ShoppingCart
     
     
     
-     func deleteItem(item : String) throws  -> String
+     func removeItem(item : String) throws  -> String
      {
         for (item_forCart, _) in self.items
         {
@@ -121,7 +121,7 @@ class ShoppingCart
     
     
     
-    func deleteAll()
+    func removeAll()
     {
         self.items.removeAll()
         self.cancelCheckOut()

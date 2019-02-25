@@ -50,6 +50,7 @@ struct Items {
     }
     
     
+    
    
 }
 
@@ -118,6 +119,32 @@ func add_item(item_name : String , price : Float) throws
             str += "the is no order created by customer"
         }
         return str
+    }
+    
+    
+    func removeItem(itemList : String) throws
+    {
+        if(!Items.items.isEmpty)
+        {
+            var removed : Bool = false
+            for (item,_) in Items.items
+            {
+                if(itemList.lowercased() == item.lowercased())
+                {
+                    Items.items.removeValue(forKey: item)
+                    removed = true
+                    break
+                }
+            }
+            if(!removed)
+            {
+                throw CustomError.INVALID("product does not exist")
+            }
+        }
+        else
+        {
+            throw CustomError.EMPTY("Product list is empty")
+        }
     }
     
     
