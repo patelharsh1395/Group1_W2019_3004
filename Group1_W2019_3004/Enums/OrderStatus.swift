@@ -13,6 +13,7 @@ import Foundation
 enum OrderStatus
 {
     case PROCESSING
-    case SHIPPED
+    case OUTFORSHIPPING
     case DELIVERED
+    case CANCELED
 }

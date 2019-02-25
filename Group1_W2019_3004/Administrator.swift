@@ -25,7 +25,7 @@ struct Items {
         }
     }
     
-    fileprivate static func add_item(item_name : String , price : Float ) throws
+    fileprivate static func add_item(item_name : String , price : Float) throws
     {
         if (Items.items.isEmpty)
         {
@@ -92,8 +92,32 @@ func add_item(item_name : String , price : Float) throws
     }
     
 }
-    static  func add_order(order : Orders)    {
+    static  func add_order(order :  Orders)    {
+        print(order.custName!,"**")
         Administrator.view_orders.append(order)
+    
+    }
+    
+   override  func display() -> String
+    {
+        var str = ""
+        if (!Administrator.view_orders.isEmpty)
+        {
+            
+        
+                for ord in Administrator.view_orders
+                {
+                    print("cust id : \(ord.custId!) , cust name : \(ord.custName!)" )
+                    print("Date of order placed : \(ord.dateCreated!)")
+                    print(ord.order_details.calcprice())
+                 
+                }
+        }
+        else
+        {
+            str += "the is no order created by customer"
+        }
+        return str
     }
     
     
