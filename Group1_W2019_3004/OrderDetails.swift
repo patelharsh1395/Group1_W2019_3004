@@ -2,9 +2,8 @@
 //  OrderDetails.swift
 //  Group1_W2019_3004
 //
-//  Created by macos on 2019-02-19.
-//  Copyright © 2019 Harsh. All rights reserved.
-//
+//  Created by Sushmitha on 2019-02-19.
+
 
 import Foundation
 
@@ -13,13 +12,15 @@ class OrderDetails
     var orderId : Int!
     var shoppingCart = [String:Float]()
     var order_status : OrderStatus!
+    var shippingInfo : ShippingInfo!
    //  let cust : Customer!
     
-    init(oId:Int , shoppingCart : [String:Float], order_status :  OrderStatus )
+    init(oId:Int , shoppingCart : [String:Float], order_status :  OrderStatus , shippingInfo : ShippingInfo)
     {
         self.orderId = oId
         self.shoppingCart = shoppingCart
         self.order_status = order_status
+        self.shippingInfo = shippingInfo
     }
     func updateStatus(order : OrderStatus)
     {
@@ -29,7 +30,8 @@ class OrderDetails
     func calcprice()
     {
         print(" orderId : \(orderId!)")
-        print(" shipping info : null ")
+        print(" shipping info :  ")
+        print(self.shippingInfo.display())
         print(" order status : \(order_status!)")
         var total : Float = 0
         var subTotal : Float = 0
@@ -49,7 +51,12 @@ class OrderDetails
             print(" Product : \(itemFromCart) , quantity : \(quant) , unitCost : \(unitPrice) , subtotal : \(subTotal) , ")
             
         }
-        print("total billing amount : \(total) ")
+        print("total billing amount : ", total)
+        print(" Shipping cost : ", self.shippingInfo.shippingType.rawValue)
+        total += Float(self.shippingInfo.shippingType.rawValue)
+        print("HST 13% tax : ", (total*13)/100 )
+        total += (total*13)/100
+        print("final amount to be paid  : \(total ) ")
     }
 
 }

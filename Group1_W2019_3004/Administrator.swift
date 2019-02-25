@@ -2,8 +2,7 @@
 //  Administrator.swift
 //  Group1_W2019_3004
 //
-//  Created by macos on 2019-02-19.
-//  Copyright © 2019 Harsh. All rights reserved.
+//  Created by Sushmitha on 2019-02-19.
 //
 
 import Foundation
@@ -48,6 +47,7 @@ struct Items {
             }
         }
     }
+    
     
     
    
@@ -118,6 +118,32 @@ func add_item(item_name : String , price : Float) throws
             str += "the is no order created by customer"
         }
         return str
+    }
+    
+    
+    func removeItem(itemList : String) throws
+    {
+        if(!Items.items.isEmpty)
+        {
+            var removed : Bool = false
+            for (item,_) in Items.items
+            {
+                if(itemList.lowercased() == item.lowercased())
+                {
+                    Items.items.removeValue(forKey: item)
+                    removed = true
+                    break
+                }
+            }
+            if(!removed)
+            {
+                throw CustomError.INVALID("product does not exist")
+            }
+        }
+        else
+        {
+            throw CustomError.EMPTY("Product list is empty")
+        }
     }
     
     

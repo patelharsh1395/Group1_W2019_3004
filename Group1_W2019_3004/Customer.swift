@@ -105,16 +105,16 @@ class Customer : User
     
     
     
-    func placeOrder(shippingInfo : ShippingInfo ) throws
+    func placeOrder(shippingType: ShippingType, shippingRegionId: String ) throws
     {
         if(self.shopping_cart.readonly_checkout)
         {
-                var orderTemp =  Orders.createOrder(custId: self.custid , custName: self.customerName,  si: shippingInfo , shoppringCart: self.shopping_cart.readItemFromCart)
+                var orderTemp =  Orders.createOrder(custId: self.custid , custName: self.customerName, shoppingCart:  self.shopping_cart.readItemFromCart, shippingType: shippingType , shippingReginId: shippingRegionId )
                // print(orderTemp.custName)
                // self.shopping_cart.deleteAll()
                 self.orders.append(orderTemp)
                 orderTemp.placeOrder()
-            self.shopping_cart.deleteAll()
+            self.shopping_cart.removeAll()
         }
         else
         {
@@ -139,4 +139,27 @@ class Customer : User
         return str
     }
     
+    
+    func addItemToShoppingCart(item : String , qty : Float) throws
+    {
+        try self.shopping_cart.addCartItem(item_forCart: item, quantity: qty)
+    }
+    func removeItemFromShoppingCart(item : String) throws
+    {
+        try self.shopping_cart.removeItem(item: item)
+    }
+    func checkout() throws
+    {
+       try self.shopping_cart.checkOut()
+    }
+    func cancelCheckout()  {
+        self.shopping_cart.cancelCheckOut()
+    }
+    func  updateQuantity (itemFromCart : String ,qty : Float)throws
+    {
+      try  self.shopping_cart.updateQuantity(item: itemFromCart , quantity: qty)
+    }
+    func  viewCartDetails() throws {
+      try  self.shopping_cart.viewCartDetails()
+    }
 }
