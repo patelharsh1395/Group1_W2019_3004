@@ -13,13 +13,12 @@ import Foundation
 class Customer : User
 {
     static var counter = 0
-    var custid : Int!
+    let custid : Int!
     var customerName : String!
     var address : String!
     var email : String!
     var creaditCardInfo : Int!
     var current_add_id = 0
-  //  var shippingInfo : String!
     let shopping_cart = ShoppingCart.getShoppingCart()
    var orders : [Orders]!
     static var cust_arr = [Customer]()

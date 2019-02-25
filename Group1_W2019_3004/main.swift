@@ -46,7 +46,7 @@ try a1.add_item(item_name: "Orange", price: 23.2)
   // print(cust.orders[0].status)
    // Administrator.view_orders[0].updateStatus(order: OrderStatus.DELIVERED)
     //print(cust.orders[0])
-   a1.display()
+   print(a1.display())
     
     print("Shopping cart : ", cust.shopping_cart.readItemFromCart)
     

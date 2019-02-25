@@ -12,16 +12,13 @@ class Orders
     private static var count = 0
     var custId : Int!
     var custName : String!
-    var orderId: Int!
+    let orderId: Int!
     var dateCreated: String!
     var dateShipped: String!
-   // var cust : Customer!
     private var status = OrderStatus.PROCESSING
     var shipping_info : ShippingInfo!
-   
-    
-    let order_details : OrderDetails!
-  //  var shoppingCartDict = [String:Float]()
+   let order_details : OrderDetails!
+  
     
     private init(  dateCreated: String , custId : Int , custName : String , si : ShippingInfo,  shoppingCart : [String:Float] )
     {
