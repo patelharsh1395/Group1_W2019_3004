@@ -13,13 +13,15 @@ class OrderDetails
     var orderId : Int!
     var shoppingCart = [String:Float]()
     var order_status : OrderStatus!
+    var shippingInfo : ShippingInfo!
    //  let cust : Customer!
     
-    init(oId:Int , shoppingCart : [String:Float], order_status :  OrderStatus )
+    init(oId:Int , shoppingCart : [String:Float], order_status :  OrderStatus , shippingInfo : ShippingInfo)
     {
         self.orderId = oId
         self.shoppingCart = shoppingCart
         self.order_status = order_status
+        self.shippingInfo = shippingInfo
     }
     func updateStatus(order : OrderStatus)
     {
@@ -29,7 +31,9 @@ class OrderDetails
     func calcprice()
     {
         print(" orderId : \(orderId!)")
-        print(" shipping info : null ")
+        print(" shipping info :  ")
+        self.shippingInfo.display()
+        print("")
         print(" order status : \(order_status!)")
         var total : Float = 0
         var subTotal : Float = 0
@@ -49,6 +53,9 @@ class OrderDetails
             print(" Product : \(itemFromCart) , quantity : \(quant) , unitCost : \(unitPrice) , subtotal : \(subTotal) , ")
             
         }
+        print("total billing amount : ", total)
+        print(" Shipping cost : ", self.shippingInfo.shippingType.rawValue)
+        total += Float(self.shippingInfo.shippingType.rawValue)
         print("total billing amount : \(total) ")
     }
 

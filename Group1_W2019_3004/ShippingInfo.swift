@@ -7,27 +7,34 @@
 //
 
 import Foundation
-class ShippingInfo
+class ShippingInfo : IDisplay
 {
-    var shippingId: Int!
-    var shippingType: String!
-    var shippingCost: Int!
-    var shippingRegionId: Int!
-    var cust : Customer!
-    init() {
-    }
     
-    init(cust : Customer ,  shippingId: Int,shippingType: String,shippingCost: Int,shippingRegionId: Int)
-    {
-       self.cust = cust
-       self.shippingId = shippingId
+    static var counter = 0
+    var shippingId: Int!
+    var shippingType: ShippingType!
+    var shippingRegionId: String!
+    var custName : String!
+    let custId :Int!
+    
+   
+    init(custId : Int , custName : String ,  shippingType: ShippingType ,shippingRegionId: String)
+    {  ShippingInfo.counter+=1
+       self.custName = custName
+       self.custId = custId
+       self.shippingId = ShippingInfo.counter
        self.shippingType = shippingType
-       self.shippingCost = shippingCost
        self.shippingRegionId = shippingRegionId
     }
     
-    func updateShippingInfo()
-    {
+    
+    
+    func display() -> String {
+        var str = ""
+        str += " Shipping id : sp\(shippingId) \nShippingType: \(shippingType) \nShippingRegin: \(shippingRegionId)  "
         
+        return str
     }
+    
+  
 }

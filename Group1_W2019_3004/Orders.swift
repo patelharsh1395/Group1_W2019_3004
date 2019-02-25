@@ -20,7 +20,7 @@ class Orders
    let order_details : OrderDetails!
   
     
-    private init(  dateCreated: String , custId : Int , custName : String , si : ShippingInfo,  shoppingCart : [String:Float] )
+    private init(  dateCreated: String , custId : Int , custName : String , shoppingCart : [String:Float] , shippingType: ShippingType, shippingRegionId: String )
     {
        
         Orders.count += 1
@@ -30,13 +30,13 @@ class Orders
         self.custId = custId
         self.custName = custName
     
-        self.shipping_info = si
+        self.shipping_info = ShippingInfo(custId: custId, custName: custName,  shippingType: shippingType, shippingRegionId: shippingRegionId)
         
        
         
-        self.order_details = OrderDetails(oId : self.orderId , shoppingCart:  shoppingCart , order_status : self.status )
+        self.order_details = OrderDetails(oId : self.orderId , shoppingCart:  shoppingCart , order_status : self.status , shippingInfo : self.shipping_info)
     }
-    static func createOrder(custId : Int, custName : String , si : ShippingInfo , shoppringCart : [String:Float]) -> Orders
+    static func createOrder(custId : Int, custName : String , shoppingCart : [String:Float] , shippingType : ShippingType , shippingReginId : String ) -> Orders
     {
        
         // reference - https://www.youtube.com/watch?v=ImZWohVhSBY
@@ -44,7 +44,7 @@ class Orders
         let day = calendar.component(.day, from: Date())
         let month = calendar.component(.month, from: Date())
         let year = calendar.component(.year, from: Date())
-        return Orders(dateCreated: "\(month)-\(day)-\(year)", custId : custId, custName : custName , si: si,  shoppingCart: shoppringCart )
+        return Orders(dateCreated: "\(month)-\(day)-\(year)", custId : custId, custName : custName ,   shoppingCart: shoppingCart ,shippingType: shippingType, shippingRegionId: shippingReginId )
         
     }
     func placeOrder()
@@ -52,10 +52,10 @@ class Orders
 
         Administrator.add_order(order: self)
     }
-    func updateStatus(order : OrderStatus)
+    func updateStatus(orderstat : OrderStatus)
     {
-        self.status = order
-        self.order_details.updateStatus(order: order)
+        self.status = orderstat
+        self.order_details.updateStatus(order: orderstat)
     }
     
 }

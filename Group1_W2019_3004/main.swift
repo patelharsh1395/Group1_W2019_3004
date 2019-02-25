@@ -34,15 +34,16 @@ try a1.add_item(item_name: "Orange", price: 23.2)
     var cust = try  Customer.login(userid: "patel@gmial.com", pass:  "1113Hp@12")
     
     
-   try  cust.shopping_cart.addCartItem(item_forCart: "TOMAto", quantity: 5.5)
-    try cust.shopping_cart.addCartItem(item_forCart: "TOMAto", quantity: 5.5)
-  try cust.shopping_cart.addCartItem(item_forCart: "Orange", quantity: 5.5)
-//
-    try  cust.shopping_cart.checkOut()
-    print("shopping cart : " )
- try   cust.shopping_cart.viewCartDetails()
+  
+  try  cust.addItemToShoppingCart(item: "TOMAto", qty: 5.5)
+   try  cust.addItemToShoppingCart(item: "TOMAto", qty: 6.5)
+    try cust.addItemToShoppingCart(item: "Orange", qty: 5.2)
+try  cust.viewCartDetails()
+    try  cust.checkout()
+    print("shopping cart : ****" )
+// cust.cancelCheckout()
     print("\n\n\n\n")
-    try cust.placeOrder(shippingInfo: ShippingInfo())
+    try cust.placeOrder( shippingType: ShippingType.EXPRESS , shippingRegionId: "m2h2x9")
     
     
 //try  cust.shopping_cart.viewCartDetails()
@@ -58,7 +59,8 @@ try a1.add_item(item_name: "Orange", price: 23.2)
    print(a1.display())
     print(Items.read_items)
   try  a1.removeItem(itemList: "Tomato")
-    print("Shopping cart : ", cust.shopping_cart.readItemFromCart)
+    print("Shopping cart : ")
+   try cust.viewCartDetails()
     
  try  cust.shopping_cart.addCartItem(item_forCart: "tomato", quantity: 20)
 }
