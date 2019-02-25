@@ -41,11 +41,14 @@ try a1.add_item(item_name: "Orange", price: 23.2)
     try  cust.shopping_cart.checkOut()
     try cust.placeOrder(shippingInfo: ShippingInfo())
     
-    a1.display()
+   // a1.display()
+    //cust.orders[0].updateStatus(order: OrderStatus.CANCELED)
+  // print(cust.orders[0].status)
+   // Administrator.view_orders[0].updateStatus(order: OrderStatus.DELIVERED)
+    //print(cust.orders[0])
+   a1.display()
     
-    
-    
-   print( cust.shopping_cart.readItemFromCart)
+    print("Shopping cart : ", cust.shopping_cart.readItemFromCart)
     
    
 }
@@ -65,5 +68,22 @@ catch CustomError.ALREADY_EXIST(let par)
 
 
 
+class A
+{
+    var a : Int!
+    init(_ a : Int) {
+        self.a = a
+    }
+}
+
+var aobj = A(20)
+
+var arr = [A]()
+arr.append(aobj)
+
+arr[0].a = 23
+aobj.a = 30
+
+print( arr[0].a ,"&&&&&")
 
 

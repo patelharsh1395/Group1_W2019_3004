@@ -8,26 +8,34 @@
 
 import Foundation
 
-class OrderDetails : Orders
+class OrderDetails
 {
     var orderId : Int!
-  //  let cust : Customer!
+    var shoppingCart = [String:Float]()
+    var order_status : OrderStatus!
+   //  let cust : Customer!
     
-    init(orderId:Int )
+    init(oId:Int , shoppingCart : [String:Float], order_status :  OrderStatus )
     {
-        self.orderId = orderId
-        //self.cust = cust
+        self.orderId = oId
+        self.shoppingCart = shoppingCart
+        self.order_status = order_status
     }
-    
+    func updateStatus(order : OrderStatus)
+    {
+        self.order_status = order
+        
+    }
     func calcprice()
     {
-        print(" orderId : \(orderId)")
+        print(" orderId : \(orderId!)")
         print(" shipping info : null ")
+        print(" order status : \(order_status!)")
         var total : Float = 0
         var subTotal : Float = 0
         var ItemsTemp = Items.read_items
         var unitPrice : Float = 0
-        for (itemFromCart,quant) in shopping_cart.readItemFromCart
+        for (itemFromCart,quant) in self.shoppingCart
         {
             for (item, price) in Items.read_items
             {

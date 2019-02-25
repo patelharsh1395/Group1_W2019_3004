@@ -11,8 +11,9 @@ import Foundation
 
 
 
-class User
+class User : IDisplay
 {
+    
  
    //static var id_pass = [String : String]()
     
@@ -79,35 +80,21 @@ class User
         self.password = password
 
     }
-//    static func user_exist(st : String) -> Bool
-//    {
-//        for i in id_pass
-//        {
-//            if(st == i)
-//            {
-//                return true
-//            }
-//        }
-//        return false
-//    }
-//    static func user_append(st : String)
-//    {
-//        users_set.insert(st)
-//    }
-//    func verifyLogin() -> Bool
-//    {
-//        if(self.loginStatus == LoginStatus.NOTVERIFIED)
-//        {
-//            return false
-//        }
-//        else
-//        {
-//            return true
-//        }
-//    }
-//    func verify () {
-//        loginStatus = LoginStatus.VERIFIED
-//    }
-//
+    func display() -> String {
+        if(!User.users_set.isEmpty)
+        {
+                var stTemp = " "
+                for ur  in User.users_set
+                {
+                    stTemp += "\(ur)\n"
+                }
+                return stTemp
+        }
+        else
+        {
+            return "no user created"
+        }
+    }
+    
     
 }

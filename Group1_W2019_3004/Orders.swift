@@ -9,19 +9,19 @@
 import Foundation
 class Orders
 {
-    private static var count = 1
+    private static var count = 0
     var custId : Int!
     var custName : String!
     var orderId: Int!
     var dateCreated: String!
     var dateShipped: String!
    // var cust : Customer!
-    var status = OrderStatus.PROCESSING
+    private var status = OrderStatus.PROCESSING
     var shipping_info : ShippingInfo!
    
     
     let order_details : OrderDetails!
-    var shoppingCartDict = [String:Float]()
+  //  var shoppingCartDict = [String:Float]()
     
     private init(  dateCreated: String , custId : Int , custName : String , si : ShippingInfo,  shoppingCart : [String:Float] )
     {
@@ -35,14 +35,11 @@ class Orders
     
         self.shipping_info = si
         
-       for (item, quantity) in shoppingCart
-       {
-        self.shoppingCartDict.updateValue(quantity, forKey: item )
-        }
+       
         
-        self.order_details = OrderDetails(orderId: self.orderId )
+        self.order_details = OrderDetails(oId : self.orderId , shoppingCart:  shoppingCart , order_status : self.status )
     }
-    static func createOrder(custId : Int, custName : String , si : ShippingInfo ) -> Orders
+    static func createOrder(custId : Int, custName : String , si : ShippingInfo , shoppringCart : [String:Float]) -> Orders
     {
        
         // reference - https://www.youtube.com/watch?v=ImZWohVhSBY
@@ -50,16 +47,18 @@ class Orders
         let day = calendar.component(.day, from: Date())
         let month = calendar.component(.month, from: Date())
         let year = calendar.component(.year, from: Date())
-        return Orders(dateCreated: "\(month)-\(day)-\(year)", custId : custId, custName : custName , si: si,  shoppingCart: cust.shopping_cart.readItemFromCart )
+        return Orders(dateCreated: "\(month)-\(day)-\(year)", custId : custId, custName : custName , si: si,  shoppingCart: shoppringCart )
         
     }
     func placeOrder()
-    {  // print(self.cust.customerName)
+    {  
+
         Administrator.add_order(order: self)
     }
     func updateStatus(order : OrderStatus)
     {
-        status = order
+        self.status = order
+        self.order_details.updateStatus(order: order)
     }
     
 }

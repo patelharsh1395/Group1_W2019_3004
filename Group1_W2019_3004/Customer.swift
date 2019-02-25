@@ -21,8 +21,12 @@ class Customer : User
     var current_add_id = 0
   //  var shippingInfo : String!
     let shopping_cart = ShoppingCart.getShoppingCart()
-    var orders : [Orders]!
+   var orders : [Orders]!
     static var cust_arr = [Customer]()
+    
+    
+    
+    
     override private init()
     {
         Customer.counter+=1
@@ -36,6 +40,10 @@ class Customer : User
     {
         orders.append(od)
     }
+    
+    
+    
+    
     static func register(customerName : String, address : String, email : String, creaditCardInfo : Int , user : User ) throws -> Bool
     {
         if(!creaditCardInfo.isValidCard())
@@ -62,6 +70,10 @@ class Customer : User
         Customer.cust_arr.append(cust)
         return true
     }
+    
+    
+    
+    
     static func login(userid: String , pass : String) throws -> Customer
     {
         var counter = 1
@@ -81,18 +93,29 @@ class Customer : User
         
     }
     
+    
+    
+    
     static func updateProfile(userid : String , pass : String )
     {
         //try var cust =  Customer.login(userid: userid , pass: pass )
         
     }
+    
+    
+    
+    
+    
     func placeOrder(shippingInfo : ShippingInfo ) throws
     {
         if(self.shopping_cart.readonly_checkout)
         {
-                let orderTemp =  Orders.createOrder(cust : self , si: shippingInfo )
-                self.shopping_cart.deleteAll()
+                var orderTemp =  Orders.createOrder(custId: self.custid , custName: self.customerName,  si: shippingInfo , shoppringCart: self.shopping_cart.readItemFromCart)
+               // print(orderTemp.custName)
+               // self.shopping_cart.deleteAll()
                 self.orders.append(orderTemp)
+                orderTemp.placeOrder()
+            self.shopping_cart.deleteAll()
         }
         else
         {
@@ -100,6 +123,21 @@ class Customer : User
         }
     }
 
-    
+    override func display() -> String {
+        var str = ""
+        if(!self.orders.isEmpty)
+        {
+            
+                for  ord in self.orders
+                {
+                    ord.order_details.calcprice()
+                }
+        }
+        else
+        {
+            str += "\(self.userId) , \(self.customerName) has no order history"
+        }
+        return str
+    }
     
 }
