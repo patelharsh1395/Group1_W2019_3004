@@ -2,8 +2,8 @@
 //  ShippingInfo.swift
 //  Group1_W2019_3004
 //
-//  Created by Kiran Mehal on 2019-02-19.
-//  Copyright © 2019 Harsh. All rights reserved.
+//  Created by gurminder on 2019-02-19.
+//
 //
 
 import Foundation
@@ -31,7 +31,7 @@ class ShippingInfo : IDisplay
     
     func display() -> String {
         var str = ""
-        str += " Shipping id : sp\(shippingId) \nShippingType: \(shippingType) \nShippingRegin: \(shippingRegionId)  "
+        str += " Shipping id : sp\(self.shippingId!) \nShippingType: \(self.shippingType!) \nShippingRegin: \(self.shippingRegionId!)  "
         
         return str
     }

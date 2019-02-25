@@ -43,7 +43,7 @@ try  cust.viewCartDetails()
     print("shopping cart : ****" )
 // cust.cancelCheckout()
     print("\n\n\n\n")
-    try cust.placeOrder( shippingType: ShippingType.EXPRESS , shippingRegionId: "m2h2x9")
+    try cust.placeOrder( shippingType: ShippingType.REGULAR , shippingRegionId: "m2h2x9")
     
     
 //try  cust.shopping_cart.viewCartDetails()

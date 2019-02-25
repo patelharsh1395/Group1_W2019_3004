@@ -2,9 +2,8 @@
 //  OrderDetails.swift
 //  Group1_W2019_3004
 //
-//  Created by macos on 2019-02-19.
-//  Copyright © 2019 Harsh. All rights reserved.
-//
+//  Created by Sushmitha on 2019-02-19.
+
 
 import Foundation
 
@@ -32,8 +31,7 @@ class OrderDetails
     {
         print(" orderId : \(orderId!)")
         print(" shipping info :  ")
-        self.shippingInfo.display()
-        print("")
+        print(self.shippingInfo.display())
         print(" order status : \(order_status!)")
         var total : Float = 0
         var subTotal : Float = 0
@@ -56,7 +54,9 @@ class OrderDetails
         print("total billing amount : ", total)
         print(" Shipping cost : ", self.shippingInfo.shippingType.rawValue)
         total += Float(self.shippingInfo.shippingType.rawValue)
-        print("total billing amount : \(total) ")
+        print("HST 13% tax : ", (total*13)/100 )
+        total += (total*13)/100
+        print("final amount to be paid  : \(total ) ")
     }
 
 }
