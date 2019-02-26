@@ -29,9 +29,9 @@ try a1.add_item(item_name: "Orange", price: 23.2)
     
 
     let c : Bool = try  Customer.register(customerName: "Harsh", address: "903 rajshree 1", email: u1.userId , creaditCardInfo : 1234567890123456, user: u1)
-   // print(c)
+    print("customer registration successful : ",c)
    
-    var cust = try  Customer.login(userid: "patel@gmial.com", pass:  "1113Hp@12")
+    let cust = try  Customer.login(userid: "patel@gmial.com", pass:  "1113Hp@12")
     
     
   

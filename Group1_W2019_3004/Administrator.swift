@@ -67,7 +67,7 @@ class Administrator : User
         self.email = email
     }
 
-func updateCatalog(item_name : String , price : Float) -> Bool
+func updateCatalog(item_name : String , price : Float)
 {
     if(Items.items.contains(where: { (item,price) -> Bool in
         return item == item_name
@@ -75,7 +75,7 @@ func updateCatalog(item_name : String , price : Float) -> Bool
     {
         Items.items[item_name] = price
     }
-    return false
+    
 }
 
 func add_item(item_name : String , price : Float) throws
@@ -84,7 +84,7 @@ func add_item(item_name : String , price : Float) throws
         return item.lowercased() == item_name.lowercased()
     }))
     {
-            updateCatalog(item_name: item_name, price: price)
+       updateCatalog(item_name: item_name, price: price)
     }
     else
     {
