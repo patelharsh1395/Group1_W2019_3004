@@ -7,11 +7,18 @@
 //
 
 import Foundation
+
 extension Float
 {
-
+    func roundedVal() -> Float
+    {
+        var temp = self
+        temp = temp * 100
+        temp.round()
+        return Float(temp/100)
+    }
     func dollar () -> String
     {
-        return String(self)+"$"
+        return "$"+String(self)
     }
 }
