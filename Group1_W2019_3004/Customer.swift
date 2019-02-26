@@ -92,24 +92,12 @@ class Customer : User
         
     }
     
-    
-    
-    
-    static func updateProfile(userid : String , pass : String )
-    {
-        //try var cust =  Customer.login(userid: userid , pass: pass )
-        
-    }
-    
-    
-    
-    
-    
     func placeOrder(shippingType: ShippingType, shippingRegionId: String ) throws
     {
         if(self.shopping_cart.readonly_checkout)
         {
-                var orderTemp =  Orders.createOrder(custId: self.custid , custName: self.customerName, shoppingCart:  self.shopping_cart.readItemFromCart, shippingType: shippingType , shippingReginId: shippingRegionId )
+                let orderTemp =  Orders.createOrder(custId: self.custid , custName: self.customerName, shoppingCart:  self.shopping_cart.readItemFromCart, shippingType: shippingType , shippingReginId: shippingRegionId )
+              print("order created sucessfully = ",orderTemp)
                // print(orderTemp.custName)
                // self.shopping_cart.deleteAll()
                 self.orders.append(orderTemp)
@@ -134,7 +122,7 @@ class Customer : User
         }
         else
         {
-            str += "\(self.userId) , \(self.customerName) has no order history"
+            str += "\(self.userId!) , \(self.customerName!) has no order history"
         }
         return str
     }
@@ -146,7 +134,7 @@ class Customer : User
     }
     func removeItemFromShoppingCart(item : String) throws
     {
-        try self.shopping_cart.removeItem(item: item)
+        print("item removed sucessfully = ",try self.shopping_cart.removeItem(item: item))
     }
     func checkout() throws
     {
@@ -157,7 +145,7 @@ class Customer : User
     }
     func  updateQuantity (itemFromCart : String ,qty : Float)throws
     {
-      try  self.shopping_cart.updateQuantity(item: itemFromCart , quantity: qty)
+        print("Quantity updated :",try  self.shopping_cart.updateQuantity(item: itemFromCart , quantity: qty))
     }
     func  viewCartDetails() throws {
       try  self.shopping_cart.viewCartDetails()

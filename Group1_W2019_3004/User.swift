@@ -26,7 +26,6 @@ class User : IDisplay
     
    var userId : String!
    var password : String!
-   var loginStatus = LoginStatus.NOTVERIFIED
    static var users_set = Set<String>()
     
 

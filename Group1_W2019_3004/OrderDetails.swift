@@ -35,7 +35,7 @@ class OrderDetails
         print(" order status : \(order_status!)")
         var total : Float = 0
         var subTotal : Float = 0
-        var ItemsTemp = Items.read_items
+       // let ItemsTemp = Items.read_items
         var unitPrice : Float = 0
         for (itemFromCart,quant) in self.shoppingCart
         {
