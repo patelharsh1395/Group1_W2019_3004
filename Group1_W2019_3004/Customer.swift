@@ -162,4 +162,42 @@ class Customer : User
     func  viewCartDetails() throws {
       try  self.shopping_cart.viewCartDetails()
     }
+    func updateStatus(ordStatus : OrderStatus , orderId : Int) throws
+    {
+       switch(ordStatus)
+       {
+            case .CANCELED :
+                        var temp = true
+                        for Order in self.orders
+                        {
+                            if(orderId == Order.orderId)
+                            {
+            
+                                switch (Order.getOrderStatus)
+                                {
+                                        case .CANCELED :
+                                            throw CustomError.INVALID("Order status cannot be changes since it is Already in CANCELED state ")
+                                            break
+                                        case .DELIVERED :
+                                            throw CustomError.INVALID("Order is in DELIVERED state and it cannot be updated to CANCELE state")
+                                        case .OUTFORSHIPPING, .PROCESSING :
+                                            Order.updateStatus(orderstat: ordStatus)
+                                            temp = false
+                                            break
+                                
+                                }
+                            }
+                        }
+                        if(temp)
+                        {
+                            throw CustomError.INVALID("There is no order with id : \(orderId)")
+                        }
+        
+            case .DELIVERED, .OUTFORSHIPPING, .PROCESSING :
+                throw CustomError.INVALID("Customer does not has rights to update to : \(ordStatus)")
+        
+        }
+        
+        
+    }
 }
