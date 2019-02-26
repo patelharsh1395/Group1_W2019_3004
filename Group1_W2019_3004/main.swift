@@ -80,6 +80,11 @@ catch CustomError.ALREADY_EXIST(let par)
 
 
 
+//let x :Float = 1.23556789
+//let y = Double(round(1000*x)/1000)
+//print(y)
+
+
 
 
 

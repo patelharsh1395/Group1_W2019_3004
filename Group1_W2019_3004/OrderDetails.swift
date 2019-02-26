@@ -48,15 +48,15 @@ class OrderDetails
                     break
                 }
             }
-            print(" Product : \(itemFromCart) , quantity : \(quant) , unitCost : \(unitPrice) , subtotal : \(subTotal) , ")
+            print(" Product : \(itemFromCart) , quantity : \(quant) , unitCost : \(unitPrice.roundedVal().dollar()) , subtotal : \(subTotal.roundedVal().dollar()) , ")
             
         }
-        print("total billing amount : ", total)
+        print("total billing amount : ", total.roundedVal().dollar())
         print(" Shipping cost : ", self.shippingInfo.shippingType.rawValue)
         total += Float(self.shippingInfo.shippingType.rawValue)
-        print("HST 13% tax : ", (total*13)/100 )
+        print("HST 13% tax : ", Float((total*13)/100).roundedVal().dollar())
         total += (total*13)/100
-        print("final amount to be paid  : \(total ) ")
+        print("final amount to be paid  : \(total.roundedVal().dollar()) ")
     }
 
 }

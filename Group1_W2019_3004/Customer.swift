@@ -167,21 +167,24 @@ class Customer : User
        switch(ordStatus)
        {
             case .CANCELED :
+                        var str = ""
                         var temp = true
-                        for Order in self.orders
+                        for TempOrder in self.orders
                         {
-                            if(orderId == Order.orderId)
+                            if(orderId == TempOrder.orderId)
                             {
             
-                                switch (Order.getOrderStatus)
+                                switch (TempOrder.getOrderStatus)
                                 {
                                         case .CANCELED :
-                                            throw CustomError.INVALID("Order status cannot be changes since it is Already in CANCELED state ")
+                                            str = "order status already in CANCELED state"
+                                            temp = false
                                             break
                                         case .DELIVERED :
                                             throw CustomError.INVALID("Order is in DELIVERED state and it cannot be updated to CANCELE state")
                                         case .OUTFORSHIPPING, .PROCESSING :
-                                            Order.updateStatus(orderstat: ordStatus)
+                                            TempOrder.updateStatus(orderstat: ordStatus)
+                                            str += "\(ordStatus)"
                                             temp = false
                                             break
                                 
