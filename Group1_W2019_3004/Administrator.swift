@@ -93,7 +93,7 @@ func add_item(item_name : String , price : Float) throws
     
 }
     static  func add_order(order :  Orders)    {
-        print(order.custName!,"**")
+       
         Administrator.view_orders.append(order)
     
     }
@@ -144,6 +144,74 @@ func add_item(item_name : String , price : Float) throws
         {
             throw CustomError.EMPTY("Product list is empty")
         }
+    }
+    func updateStatus(ordStatus : OrderStatus , orderId : Int) throws -> String
+    {
+        var temp = true
+        var str = "Status updated to : "
+        for TempOrder in Administrator.view_orders
+        {
+            if(orderId == TempOrder.orderId)
+            {
+
+                  switch (TempOrder.getOrderStatus)
+                  {
+                    case .CANCELED :
+                        throw CustomError.INVALID("Order status cannot be changes since it is Already in CANCELED state ")
+                    case .DELIVERED :
+                            switch(ordStatus)
+                            {
+                                case .DELIVERED :
+                                    str = "It is already in DELIVERED status"
+                                    temp = false
+                                    break
+                                case .CANCELED, .OUTFORSHIPPING, .PROCESSING :
+                                    str = "Status cannot be updated to \(ordStatus) because it is in DELIVERED state"
+                                    temp = false
+                                    break
+                                
+                            }
+                    case .OUTFORSHIPPING :
+                            switch(ordStatus)
+                            {
+                                case .CANCELED, .DELIVERED :
+                                    TempOrder.updateStatus(orderstat: ordStatus)
+                                    temp = false
+                                    str += "\(ordStatus)"
+                                    break
+                                
+                                case .OUTFORSHIPPING :
+                                    str = "Already in OUTFORSHIPPING state"
+                                    temp = false
+                                    break
+                                case .PROCESSING :
+                                    str = "Already in OUTFORSHIPPING, cannot be update to PROCESSING state"
+                            }
+                    case .PROCESSING :
+                            switch(ordStatus)
+                            {
+                                case .CANCELED , .OUTFORSHIPPING :
+                                    TempOrder.updateStatus(orderstat: ordStatus)
+                                    temp = false
+                                    str += "\(ordStatus)"
+                                    break
+                                case .PROCESSING :
+                                        str = "Already in PROCESSING state"
+                                        temp = false
+                                        break
+                                case .DELIVERED :
+                                        throw CustomError.INVALID("Cannot be updated to DELIVERED state unless it is updated to OUTFORSHIPPING state ")
+                                
+                            }
+                  }
+            }
+            
+        }
+        if(temp)
+        {
+            throw CustomError.INVALID("There is no order with id : \(orderId)")
+        }
+    return str
     }
     
     

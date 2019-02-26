@@ -16,6 +16,13 @@ class Orders
     var dateCreated: String!
     var dateShipped: String!
     private var status = OrderStatus.PROCESSING
+    var getOrderStatus : OrderStatus
+    {
+        get
+        {
+            return status
+        }
+    }
     var shipping_info : ShippingInfo!
    let order_details : OrderDetails!
   

@@ -38,9 +38,9 @@ try a1.add_item(item_name: "Orange", price: 23.2)
   try  cust.addItemToShoppingCart(item: "TOMAto", qty: 5.5)
    try  cust.addItemToShoppingCart(item: "TOMAto", qty: 6.5)
     try cust.addItemToShoppingCart(item: "Orange", qty: 5.2)
-try  cust.viewCartDetails()
+//try  cust.viewCartDetails()
     try  cust.checkout()
-    print("shopping cart : ****" )
+   // print("shopping cart : ****" )
 // cust.cancelCheckout()
     print("\n\n\n\n")
     try cust.placeOrder( shippingType: ShippingType.REGULAR , shippingRegionId: "m2h2x9")
@@ -55,7 +55,7 @@ try  cust.viewCartDetails()
   // print(cust.orders[0].status)
    // Administrator.view_orders[0].updateStatus(order: OrderStatus.DELIVERED)
     //print(cust.orders[0])
-    print("\n\n\n a1.display")
+   
    print(a1.display())
     print(Items.read_items)
   try  a1.removeItem(itemList: "Tomato")
@@ -80,22 +80,6 @@ catch CustomError.ALREADY_EXIST(let par)
 
 
 
-class A
-{
-    var a : Int!
-    init(_ a : Int) {
-        self.a = a
-    }
-}
 
-var aobj = A(20)
-
-var arr = [A]()
-arr.append(aobj)
-
-arr[0].a = 23
-aobj.a = 30
-
-print( arr[0].a ,"&&&&&")
 
 
