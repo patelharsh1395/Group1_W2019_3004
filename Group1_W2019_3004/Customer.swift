@@ -92,19 +92,6 @@ class Customer : User
         
     }
     
-    
-    
-    
-    static func updateProfile(userid : String , pass : String )
-    {
-        //try var cust =  Customer.login(userid: userid , pass: pass )
-        
-    }
-    
-    
-    
-    
-    
     func placeOrder(shippingType: ShippingType, shippingRegionId: String ) throws
     {
         if(self.shopping_cart.readonly_checkout)

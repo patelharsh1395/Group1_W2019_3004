@@ -11,7 +11,6 @@
 		2271055622249F6800DC86A8 /* ShippingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271055522249F6800DC86A8 /* ShippingType.swift */; };
 		22897A0F221F0AD600F89D48 /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22897A0E221F0AD600F89D48 /* Items.swift */; };
 		22897A12221F2D4E00F89D48 /* FloatEXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22897A11221F2D4E00F89D48 /* FloatEXT.swift */; };
-		22897A15221F2F0F00F89D48 /* LoginStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22897A14221F2F0F00F89D48 /* LoginStatus.swift */; };
 		22897A17221F3A9600F89D48 /* IntEXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22897A16221F3A9600F89D48 /* IntEXT.swift */; };
 		22897A19221F4B3F00F89D48 /* SetEXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22897A18221F4B3F00F89D48 /* SetEXT.swift */; };
 		3A115715221C8A6F00205B0D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A115714221C8A6F00205B0D /* main.swift */; };
@@ -44,7 +43,6 @@
 		2271055522249F6800DC86A8 /* ShippingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShippingType.swift; sourceTree = "<group>"; };
 		22897A0E221F0AD600F89D48 /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
 		22897A11221F2D4E00F89D48 /* FloatEXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatEXT.swift; sourceTree = "<group>"; };
-		22897A14221F2F0F00F89D48 /* LoginStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStatus.swift; sourceTree = "<group>"; };
 		22897A16221F3A9600F89D48 /* IntEXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntEXT.swift; sourceTree = "<group>"; };
 		22897A18221F4B3F00F89D48 /* SetEXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetEXT.swift; sourceTree = "<group>"; };
 		3A115711221C8A6F00205B0D /* Group1_W2019_3004 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Group1_W2019_3004; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,7 +81,6 @@
 		22897A13221F2EED00F89D48 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				22897A14221F2F0F00F89D48 /* LoginStatus.swift */,
 				227105532220681E00DC86A8 /* CustomError.swift */,
 				9B494B1F2220D0F000CD04B0 /* OrderStatus.swift */,
 				2271055522249F6800DC86A8 /* ShippingType.swift */,
@@ -203,7 +200,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A11572A221C96DB00205B0D /* Orders.swift in Sources */,
-				22897A15221F2F0F00F89D48 /* LoginStatus.swift in Sources */,
 				3A11572E221C96DB00205B0D /* Customer.swift in Sources */,
 				2271055622249F6800DC86A8 /* ShippingType.swift in Sources */,
 				3A115732221C9C3700205B0D /* StringEXT.swift in Sources */,
