@@ -14,34 +14,31 @@ class Orders
     var custName : String!
     let orderId: Int!
     var dateCreated: String!
-    var dateShipped: String!
-    private var status = OrderStatus.PROCESSING
+    var orderItems : [String:Float]
+    private var orderStatus = OrderStatus.PROCESSING
     var getOrderStatus : OrderStatus
     {
         get
         {
-            return status
+            return orderStatus
         }
     }
-    var shipping_info : ShippingInfo!
-   let order_details : OrderDetails!
+    var shippingInfo : ShippingInfo!
+   
   
     
-    private init(  dateCreated: String , custId : Int , custName : String , shoppingCart : [String:Float] , shippingType: ShippingType, shippingRegionId: String )
+     init(  dateCreated: String ,  orderItems : [String:Float] , shippingType: ShippingType, shippingRegionId: String )
     {
        
         Orders.count += 1
         self.orderId = Orders.count
         self.dateCreated = dateCreated
-        self.dateShipped = ""
-        self.custId = custId
-        self.custName = custName
-    
-        self.shipping_info = ShippingInfo(custId: custId, custName: custName,  shippingType: shippingType, shippingRegionId: shippingRegionId)
+        self.orderItems = orderItems
+        self.shippingInfo = ShippingInfo(  shippingType: shippingType, shippingRegionId: shippingRegionId)
         
        
         
-        self.order_details = OrderDetails(oId : self.orderId , shoppingCart:  shoppingCart , order_status : self.status , shippingInfo : self.shipping_info)
+       
     }
     static func createOrder(custId : Int, custName : String , shoppingCart : [String:Float] , shippingType : ShippingType , shippingReginId : String ) -> Orders
     {
@@ -51,7 +48,7 @@ class Orders
         let day = calendar.component(.day, from: Date())
         let month = calendar.component(.month, from: Date())
         let year = calendar.component(.year, from: Date())
-        return Orders(dateCreated: "\(month)-\(day)-\(year)", custId : custId, custName : custName ,   shoppingCart: shoppingCart ,shippingType: shippingType, shippingRegionId: shippingReginId )
+        return Orders(dateCreated: "\(month)-\(day)-\(year)",  orderItems : shoppingCart , shippingType: shippingType, shippingRegionId: shippingReginId)
         
     }
     func placeOrder()
@@ -61,8 +58,39 @@ class Orders
     }
     func updateStatus(orderstat : OrderStatus)
     {
-        self.status = orderstat
-        self.order_details.updateStatus(order: orderstat)
+        self.orderStatus = orderstat
+       
+    }
+    func calcprice()
+    {
+        print(" orderId : \(orderId!)")
+        print(" shipping info :  ")
+        print(self.shippingInfo.display())
+        print(" order status : \(orderStatus)")
+        var total : Float = 0
+        var subTotal : Float = 0
+        // let ItemsTemp = Items.read_items
+        var unitPrice : Float = 0
+        for (itemFromCart,quant) in self.orderItems
+        {
+            for (item, price) in Items.read_items
+            {
+                if(item.lowercased() == itemFromCart.lowercased())
+                {   unitPrice = price
+                    subTotal = price*quant
+                    total+=subTotal
+                    break
+                }
+            }
+            print(" Product : \(itemFromCart) , quantity : \(quant) , unitCost : \(unitPrice.roundedVal().dollar()) , subtotal : \(subTotal.roundedVal().dollar()) , ")
+            
+        }
+        print("total billing amount : ", total.roundedVal().dollar())
+        print(" Shipping cost : ", Float(self.shippingInfo.shippingType.rawValue).dollar())
+        total += Float(self.shippingInfo.shippingType.rawValue)
+        print("HST 13% tax : ", Float((total*13)/100).roundedVal().dollar())
+        total += (total*13)/100
+        print("final amount to be paid  : \(total.roundedVal().dollar()) \n\n\n")
     }
     
 }

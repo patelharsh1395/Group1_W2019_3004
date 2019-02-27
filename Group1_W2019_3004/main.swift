@@ -9,60 +9,60 @@
 import Foundation
 
 
-var u1 = try  User(password: "1113Hp@12", userId: "patel@gmial.com")
-
-
-//var u2 = try  User(password: "1113Hp@12", userId: "patel@gmial.com")
-
-var a1 = Administrator(adminName: "Harsh" , email: u1.userId , user : u1 )
 
     
 do
 {
-try a1.add_item(item_name: "Tomato", price: 20)
-try a1.add_item(item_name: "Tomato", price: 21)
-try a1.add_item(item_name: "Orange", price: 23.2)
-//try a1.add_item(item_name: "toma", price: 20)
-    
- 
-    
-    
 
-    let c : Bool = try  Customer.register(customerName: "Harsh", address: "903 rajshree 1", email: u1.userId , creaditCardInfo : 1234567890123456, user: u1)
-    print("customer registration successful : ",c)
-   
-    let cust = try  Customer.login(userid: "patel@gmial.com", pass:  "1113Hp@12")
+    print("admin got registered : ",try Administrator.register(adminName: "Guru", userId: "guru@gmail.com", password: "11380Hp@30"))
+  //  print("admin got registered : ",try Administrator.register(adminName: "Guru", userId: "guru@gmail.com", password: "11380Hp@30"))
+    
+   var ad = try Administrator.login(userid: "guru@gmail.com" , pass: "11380Hp@30")
+    print(ad.adminName!)
     
     
-  
-  try  cust.addItemToShoppingCart(item: "TOMAto", qty: 5.5)
-   try  cust.addItemToShoppingCart(item: "TOMAto", qty: 6.5)
-    try cust.addItemToShoppingCart(item: "Orange", qty: 5.2)
-//try  cust.viewCartDetails()
-    try  cust.checkout()
-   // print("shopping cart : ****" )
-// cust.cancelCheckout()
-    print("\n\n\n\n")
-    try cust.placeOrder( shippingType: ShippingType.REGULAR , shippingRegionId: "m2h2x9")
+    print("Customer created : ",try Customer.register(customerName: "Devang", address: "11321431", creaditCardInfo: 1234567890123456, userId: "guru1@gmail.com", password: "11380Hp@30"))
+//     print("Customer created : ",try Customer.register(customerName: "Devang", address: "11321431", creaditCardInfo: 1234567890123456, userId: "guru1@gmail.com", password: "11380Hp@30"))
+    var cust = try Customer.login(userid: "guru1@gmail.com", pass: "11380Hp@30")
+    print(cust.customerName!)
     
     
-//try  cust.shopping_cart.viewCartDetails()
+    print("Customer created : ",try Customer.register(customerName: "Rohan", address: "11321431", creaditCardInfo: 1234567890123456, userId: "guru2@gmail.com", password: "11380Hp@30"))
+    var cust2 = try Customer.login(userid: "guru2@gmail.com", pass: "11380Hp@30")
+    print(cust2.customerName!)
     
     
+   try ad.add_item(item_name: "CPU", price: 300)
+   try ad.add_item(item_name: "hardisk", price: 70)
+    try ad.add_item(item_name: "CPU", price: 400)
     
-   // a1.display()
-    //cust.orders[0].updateStatus(order: OrderStatus.CANCELED)
-  // print(cust.orders[0].status)
-   // Administrator.view_orders[0].updateStatus(order: OrderStatus.DELIVERED)
-    //print(cust.orders[0])
-   
-   print(a1.display())
-    print(Items.read_items)
-  try  a1.removeItem(itemList: "Tomato")
-    print("Shopping cart : ")
-   try cust.viewCartDetails()
+    print("present in catalog :",Items.read_items)
     
- try  cust.shopping_cart.addCartItem(item_forCart: "tomato", quantity: 20)
+    
+    try cust.addItemToShoppingCart(item: "cpu", qty: 2)
+    try cust.addItemToShoppingCart(item: "cpu", qty: 3)
+//     try cust.addItemToShoppingCart(item: "cpu1", qty: 3)      // CPU1 not present into catalog
+    
+    print("inside cart : ",cust.shopping_cart.readItemFromCart)
+    
+   try  cust.checkout()
+  //  try cust.cancelCheckout()   // if we cancel checkout we cannot place an order
+    try cust.placeOrder(shippingType: ShippingType.EXPRESS , shippingRegionId: "123")
+    print("\n\n\nShopping cart after placing order : ",try cust.shopping_cart.readItemFromCart)
+   try  cust.display()
+    
+    print("\n\n\n\nprinting all orders from administrator before  updating status of order from cust object\n\n\n\n")
+    ad.display()
+    // now need to change status of order 1 from cust (Note : customer can only Cancel the order i.e updating status to CANCELED)
+ // try cust.updateStatus(ordStatus: OrderStatus.DELIVERED , orderId: 1)   //  Customer does not has rights to update to : DELIVERED     i.e can only update to CANCELED
+  try cust.updateStatus(ordStatus: OrderStatus.CANCELED , orderId: 1)
+    print("\n\n\n\nprinting all orders from customer after updating status \n\n\n\n")
+  try  cust.display()
+    
+    
+    print("\n\n\n printing all orders from administrator after updating status of order from cust object \n\n\n" )
+    ad.display()
+    
 }
 catch CustomError.EMPTY(let par)
 {
