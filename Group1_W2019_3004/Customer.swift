@@ -16,13 +16,11 @@ class Customer : User
     let custid : Int!
     var customerName : String!
     var address : String!
-    var email : String!
     var creaditCardInfo : Int!
     var current_add_id = 0
     let shopping_cart = ShoppingCart.getShoppingCart()
-   var orders : [Orders]!
-    static var cust_arr = [Customer]()
-    
+    var orders : [Orders]!
+    static var usersDictionary : [String:(String,Customer)]! = nil
     
     
     
@@ -43,54 +41,78 @@ class Customer : User
     
     
     
-    static func register(customerName : String, address : String, email : String, creaditCardInfo : Int , user : User ) throws -> Bool
+    static func register(customerName : String, address : String,  creaditCardInfo : Int , userId : String , password : String ) throws -> Bool
     {
-        if(!creaditCardInfo.isValidCard())
-        {
-            throw CustomError.INVALID(" Invalid credit card ")
-        }
         
-        if(address == "" || address.isEmpty)
+        if (!userId.isEmpty && !password.isEmpty && !customerName.isEmpty && !address.isEmpty  )
         {
-            throw CustomError.INVALID("Address cannot be empty")
+            if(userId.isValidEmail())
+            {
+                if let _ = Customer.usersDictionary[userId]
+                {
+                    throw CustomError.ALREADY_EXIST("\(userId) already exist")
+                }
+                else
+                {  // print("inside else contains")
+                    if(password.isValidPassword())
+                    {
+                        if(!creaditCardInfo.isValidCard())
+                        {
+                            throw CustomError.INVALID(" Invalid credit card ")
+                        }
+                        let cust = Customer()
+                        cust.customerName = customerName
+                        cust.address = address
+                        cust.creaditCardInfo = creaditCardInfo
+                        //cust.shippingInfo = shippingInfo
+                        
+                        // cust.shopping_cart =
+                        cust.orders = []
+                        Customer.usersDictionary.updateValue((password,cust), forKey: userId)
+                        
+                    }
+                    else
+                    {
+                        throw CustomError.INVALID("Password is in invalid format")
+                    }
+                    
+                }
+                
+            }
+            else
+            {
+                throw CustomError.INVALID("UserId is in invalid format")
+            }
+            
         }
-        let cust = Customer()
-        cust.userId = user.userId
-        cust.password = user.password
-        cust.customerName = customerName
-        cust.address = address
-        cust.email = user.userId
-        cust.creaditCardInfo = creaditCardInfo
-        //cust.shippingInfo = shippingInfo
-      
-       // cust.shopping_cart =
-       cust.orders = []
-        
-        Customer.cust_arr.append(cust)
+        else
+        {
+            throw CustomError.EMPTY("Field cannot be empty")
+        }
         return true
     }
     
     
-    
+  
     
     static func login(userid: String , pass : String) throws -> Customer
     {
-        var counter = 1
-        for Cust in Customer.cust_arr
+        var cust : Customer?
+        if let _ = Customer.usersDictionary[userid]
         {
-            if(Cust.userId == userid && Cust.password == pass)
+            if(Customer.usersDictionary[userid]!.0 == pass)
             {
-                counter = 0
-                return Cust
-                
+                 cust = Customer.usersDictionary[userid]!.1
             }
         }
-        if(counter == 1)
+        else
         {
-            throw CustomError.INVALID("Invalid userid and password")
+            throw CustomError.INVALID("UserID and password are invalid")
         }
-        
+        return cust!
     }
+    
+    
     
     func placeOrder(shippingType: ShippingType, shippingRegionId: String ) throws
     {
@@ -98,11 +120,9 @@ class Customer : User
         {
                 let orderTemp =  Orders.createOrder(custId: self.custid , custName: self.customerName, shoppingCart:  self.shopping_cart.readItemFromCart, shippingType: shippingType , shippingReginId: shippingRegionId )
               print("order created sucessfully = ",orderTemp)
-               // print(orderTemp.custName)
-               // self.shopping_cart.deleteAll()
                 self.orders.append(orderTemp)
                 orderTemp.placeOrder()
-            self.shopping_cart.removeAll()
+                self.shopping_cart.removeAll()
         }
         else
         {
@@ -110,14 +130,15 @@ class Customer : User
         }
     }
 
-    override func display() -> String {
+    
+    
+    func display() -> String {
         var str = ""
         if(!self.orders.isEmpty)
         {
-            
                 for  ord in self.orders
                 {
-                    ord.order_details.calcprice()
+                    ord.calcprice()
                 }
         }
         else
