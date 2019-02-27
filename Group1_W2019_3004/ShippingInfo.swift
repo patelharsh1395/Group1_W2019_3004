@@ -14,14 +14,11 @@ class ShippingInfo : IDisplay
     var shippingId: Int!
     var shippingType: ShippingType!
     var shippingRegionId: String!
-    var custName : String!
-    let custId :Int!
+    
     
    
-    init(custId : Int , custName : String ,  shippingType: ShippingType ,shippingRegionId: String)
+    init( shippingType: ShippingType ,shippingRegionId: String)
     {  ShippingInfo.counter+=1
-       self.custName = custName
-       self.custId = custId
        self.shippingId = ShippingInfo.counter
        self.shippingType = shippingType
        self.shippingRegionId = shippingRegionId

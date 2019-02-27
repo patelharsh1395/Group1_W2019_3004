@@ -34,7 +34,7 @@ class Orders
         self.orderId = Orders.count
         self.dateCreated = dateCreated
         self.orderItems = orderItems
-        self.shippingInfo = ShippingInfo(custId: custId, custName: custName,  shippingType: shippingType, shippingRegionId: shippingRegionId)
+        self.shippingInfo = ShippingInfo(  shippingType: shippingType, shippingRegionId: shippingRegionId)
         
        
         
@@ -86,11 +86,11 @@ class Orders
             
         }
         print("total billing amount : ", total.roundedVal().dollar())
-        print(" Shipping cost : ", self.shippingInfo.shippingType.rawValue)
+        print(" Shipping cost : ", Float(self.shippingInfo.shippingType.rawValue).dollar())
         total += Float(self.shippingInfo.shippingType.rawValue)
         print("HST 13% tax : ", Float((total*13)/100).roundedVal().dollar())
         total += (total*13)/100
-        print("final amount to be paid  : \(total.roundedVal().dollar()) ")
+        print("final amount to be paid  : \(total.roundedVal().dollar()) \n\n\n")
     }
     
 }

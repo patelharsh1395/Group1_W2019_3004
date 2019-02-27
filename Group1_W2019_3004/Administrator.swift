@@ -60,8 +60,7 @@ class Administrator : User
     private static var view_orders = [Orders]()
     var adminName : String!
     var email : String!
-    static var adminDictionary : [String:(String,Administrator)]! = nil
-    
+    static var adminDictionary = [String:(String,Administrator)]()
     
     private init(adminName:String, userid :String , pass : String)
     {
@@ -130,33 +129,53 @@ class Administrator : User
         
         if (!userId.isEmpty && !password.isEmpty && !adminName.isEmpty)
         {
-            if(userId.isValidEmail())
-            {
-                if let _ = Administrator.adminDictionary[userId]
+                if(userId.isValidEmail())
                 {
-                    throw CustomError.ALREADY_EXIST("\(userId) already exist")
+                                if(Administrator.adminDictionary.isEmpty)
+                                {
+                                
+                         
+                                                    if(password.isValidPassword())
+                                                    {
+                                                       
+                                                        let admin = Administrator(adminName: adminName, userid: userId, pass: password)
+                                                        Administrator.adminDictionary.updateValue((password, admin), forKey: userId)
+                                                        
+                                                    }
+                                                    else
+                                                    {
+                                                        throw CustomError.INVALID("Password is in invalid format")
+                                                    }
+                                
+                                }
+                                else
+                                {
+                                                    if let _ = Administrator.adminDictionary[userId]
+                                                    {
+                                                        throw CustomError.ALREADY_EXIST("\(userId) already exist")
+                                                    }
+                                                    else
+                                                    {
+                                        
+                                                    
+                                                                        if(password.isValidPassword())
+                                                                        {
+                                                                            
+                                                                            let admin = Administrator(adminName: adminName, userid: userId, pass: password)
+                                                                            Administrator.adminDictionary.updateValue((password, admin), forKey: userId)
+                                                                            
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            throw CustomError.INVALID("Password is in invalid format")
+                                                                        }
+                                                    }
+                                }
                 }
                 else
-                {  // print("inside else contains")
-                    if(password.isValidPassword())
-                    {
-                       
-                        let admin = Administrator(adminName: adminName, userid: userId, pass: password)
-                        Administrator.adminDictionary.updateValue((password, admin), forKey: userId)
-                        
-                    }
-                    else
-                    {
-                        throw CustomError.INVALID("Password is in invalid format")
-                    }
-                    
+                {
+                    throw CustomError.INVALID("UserId is in invalid format")
                 }
-                
-            }
-            else
-            {
-                throw CustomError.INVALID("UserId is in invalid format")
-            }
             
         }
         else
@@ -272,7 +291,11 @@ class Administrator : User
             {
                 if(Administrator.adminDictionary[userid]!.0 == pass)
                 {
-                    cust = Administrator.adminDictionary[userid]!.1
+                    admin = Administrator.adminDictionary[userid]!.1
+                }
+                else
+                {
+                    throw CustomError.INVALID("password invalid")
                 }
             }
             else

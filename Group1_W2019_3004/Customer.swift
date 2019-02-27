@@ -10,6 +10,9 @@ import Foundation
 
 
 
+
+
+
 class Customer : User
 {
     static var counter = 0
@@ -20,7 +23,7 @@ class Customer : User
     var current_add_id = 0
     let shopping_cart = ShoppingCart.getShoppingCart()
     var orders : [Orders]!
-    static var usersDictionary : [String:(String,Customer)]! = nil
+    static var usersDictionary = [String:(String,Customer)]()
     
     
     
@@ -46,43 +49,72 @@ class Customer : User
         
         if (!userId.isEmpty && !password.isEmpty && !customerName.isEmpty && !address.isEmpty  )
         {
-            if(userId.isValidEmail())
-            {
-                if let _ = Customer.usersDictionary[userId]
-                {
-                    throw CustomError.ALREADY_EXIST("\(userId) already exist")
-                }
-                else
-                {  // print("inside else contains")
-                    if(password.isValidPassword())
-                    {
-                        if(!creaditCardInfo.isValidCard())
+                        if(userId.isValidEmail())
                         {
-                            throw CustomError.INVALID(" Invalid credit card ")
+                                            if(Customer.usersDictionary.isEmpty)
+                                            {
+                                                
+                                                
+                                                                    if(password.isValidPassword())
+                                                                    {
+                                                                        
+                                                                       
+                                                                        
+                                                                                            if(!creaditCardInfo.isValidCard())
+                                                                                            {
+                                                                                                throw CustomError.INVALID(" Invalid credit card ")
+                                                                                            }
+                                                                                            let cust = Customer()
+                                                                                            cust.customerName = customerName
+                                                                                            cust.address = address
+                                                                                            cust.creaditCardInfo = creaditCardInfo
+                                                                                            cust.orders = []
+                                                                                            Customer.usersDictionary.updateValue((password,cust), forKey: userId)
+                                                                        
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        throw CustomError.INVALID("Password is in invalid format")
+                                                                    }
+                                                
+                                            }
+                                            else
+                                            {
+                                                                    if let _ = Customer.usersDictionary[userId]
+                                                                    {
+                                                                        throw CustomError.ALREADY_EXIST("\(userId) already exist")
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        
+                                                                        
+                                                                                            if(password.isValidPassword())
+                                                                                            {
+                                                                                                
+                                                                                                if(!creaditCardInfo.isValidCard())
+                                                                                                {
+                                                                                                    throw CustomError.INVALID(" Invalid credit card ")
+                                                                                                }
+                                                                                                let cust = Customer()
+                                                                                                cust.customerName = customerName
+                                                                                                cust.address = address
+                                                                                                cust.creaditCardInfo = creaditCardInfo
+                                                                                                cust.orders = []
+                                                                                                Customer.usersDictionary.updateValue((password,cust), forKey: userId)
+                                                                                                
+                                                                                                
+                                                                                            }
+                                                                                            else
+                                                                                            {
+                                                                                                throw CustomError.INVALID("Password is in invalid format")
+                                                                                            }
+                                                                    }
+                                            }
                         }
-                        let cust = Customer()
-                        cust.customerName = customerName
-                        cust.address = address
-                        cust.creaditCardInfo = creaditCardInfo
-                        //cust.shippingInfo = shippingInfo
-                        
-                        // cust.shopping_cart =
-                        cust.orders = []
-                        Customer.usersDictionary.updateValue((password,cust), forKey: userId)
-                        
-                    }
-                    else
-                    {
-                        throw CustomError.INVALID("Password is in invalid format")
-                    }
-                    
-                }
-                
-            }
-            else
-            {
-                throw CustomError.INVALID("UserId is in invalid format")
-            }
+                        else
+                        {
+                            throw CustomError.INVALID("UserId is in invalid format")
+                        }
             
         }
         else
@@ -97,19 +129,23 @@ class Customer : User
     
     static func login(userid: String , pass : String) throws -> Customer
     {
-        var cust : Customer?
+        var cust : Customer!
         if let _ = Customer.usersDictionary[userid]
         {
             if(Customer.usersDictionary[userid]!.0 == pass)
             {
                  cust = Customer.usersDictionary[userid]!.1
             }
+            else
+            {
+                throw CustomError.INVALID("password invalid")
+            }
         }
         else
         {
             throw CustomError.INVALID("UserID and password are invalid")
         }
-        return cust!
+        return cust
     }
     
     
@@ -119,7 +155,7 @@ class Customer : User
         if(self.shopping_cart.readonly_checkout)
         {
                 let orderTemp =  Orders.createOrder(custId: self.custid , custName: self.customerName, shoppingCart:  self.shopping_cart.readItemFromCart, shippingType: shippingType , shippingReginId: shippingRegionId )
-              print("order created sucessfully = ",orderTemp)
+              print("order created sucessfully ")
                 self.orders.append(orderTemp)
                 orderTemp.placeOrder()
                 self.shopping_cart.removeAll()
