@@ -110,8 +110,7 @@ class Administrator : User
             
                     for ord in Administrator.view_orders
                     {
-                        print("cust id : \(ord.custId!) , cust name : \(ord.custName!)" )
-                        print("Date of order placed : \(ord.dateCreated!)")
+                     
                         print(ord.calcprice())
                      
                     }

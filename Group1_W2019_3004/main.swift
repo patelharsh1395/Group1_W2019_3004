@@ -46,11 +46,23 @@ do
     print("inside cart : ",cust.shopping_cart.readItemFromCart)
     
    try  cust.checkout()
+  //  try cust.cancelCheckout()   // if we cancel checkout we cannot place an order
     try cust.placeOrder(shippingType: ShippingType.EXPRESS , shippingRegionId: "123")
     print("\n\n\nShopping cart after placing order : ",try cust.shopping_cart.readItemFromCart)
    try  cust.display()
     
-  
+    print("\n\n\n\nprinting all orders from administrator before  updating status of order from cust object\n\n\n\n")
+    ad.display()
+    // now need to change status of order 1 from cust (Note : customer can only Cancel the order i.e updating status to CANCELED)
+ // try cust.updateStatus(ordStatus: OrderStatus.DELIVERED , orderId: 1)   //  Customer does not has rights to update to : DELIVERED     i.e can only update to CANCELED
+  try cust.updateStatus(ordStatus: OrderStatus.CANCELED , orderId: 1)
+    print("\n\n\n\nprinting all orders from customer after updating status \n\n\n\n")
+  try  cust.display()
+    
+    
+    print("\n\n\n printing all orders from administrator after updating status of order from cust object \n\n\n" )
+    ad.display()
+    
 }
 catch CustomError.EMPTY(let par)
 {
